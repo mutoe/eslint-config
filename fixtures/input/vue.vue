@@ -4,6 +4,7 @@
       {{ greeting }}</h1>
     <button @click="incrementCounter">Click me!</button>
     <p>Counter: {{ counter  }}</p>
+    <ul><li  v-for="  number   in counter   " :key="number" :class="['static', {active: number === 1}]"></li></ul>
   </div>
 </template>
 

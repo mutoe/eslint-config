@@ -7,6 +7,14 @@
 			Click me!
 		</button>
 		<p>Counter: {{ counter }}</p>
+		<ul>
+			<li
+				v-for=" number in counter "
+				:key="number"
+				class="static"
+				:class="[{ active: number === 1 }]"
+			/>
+		</ul>
 	</div>
 </template>
 
