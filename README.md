@@ -1,6 +1,22 @@
-# @antfu/eslint-config
+# @mutoe/eslint-config
 
-[![npm](https://img.shields.io/npm/v/@antfu/eslint-config?color=444&label=)](https://npmjs.com/package/@antfu/eslint-config) [![code style](https://antfu.me/badge-code-style.svg)](https://github.com/antfu/eslint-config)
+> Forked from [antfu/eslint-config](https://github.com/antfu/eslint-config)
+
+[![npm](https://img.shields.io/npm/v/@mutoe/eslint-config?color=444&label=mutoe/eslint-config)](https://npmjs.com/package/@mutoe/eslint-config)
+[![npm](https://img.shields.io/npm/v/@antfu/eslint-config?color=444&label=Upstream)](https://npmjs.com/package/@antfu/eslint-config)
+
+[![code style](https://antfu.me/badge-code-style.svg)](https://github.com/antfu/eslint-config)
+
+Based on the version of @Antfu, the following sections have been modified:
+
+- Update default package name to `defineConfig`
+- Supplement more `package.json` properties ordering rules
+- (Plan) Reduce the number of default dependencies
+- (Plan) Some of my favorite styles
+
+---
+
+Following is what the Antfu version supports:
 
 - Single quotes, no semi
 - Auto fix for formatting (aimed to be used standalone **without** Prettier)
@@ -23,7 +39,7 @@
 ### Install
 
 ```bash
-pnpm i -D eslint @antfu/eslint-config
+pnpm i -D eslint @mutoe/eslint-config
 ```
 
 ### Create config file
@@ -32,30 +48,30 @@ With [`"type": "module"`](https://nodejs.org/api/packages.html#type) in `package
 
 ```js
 // eslint.config.js
-import antfu from '@antfu/eslint-config'
+import defineConfig from '@mutoe/eslint-config'
 
-export default antfu()
+export default defineConfig()
 ```
 
 With CJS:
 
 ```js
 // eslint.config.js
-const antfu = require('@antfu/eslint-config').default
+const defineConfig = require('@mutoe/eslint-config').default
 
-module.exports = antfu()
+module.exports = defineConfig()
 ```
 
 Combined with legacy config:
 
 ```js
 // eslint.config.js
-const antfu = require('@antfu/eslint-config').default
+const defineConfig = require('@mutoe/eslint-config').default
 const { FlatCompat } = require('@eslint/eslintrc')
 
 const compat = new FlatCompat()
 
-module.exports = antfu(
+module.exports = defineConfig(
   {
     ignores: [],
   },
@@ -92,7 +108,7 @@ For example:
 We provided an experimental CLI tool to help you migrate from the legacy config to the new flat config.
 
 ```bash
-npx @antfu/eslint-config@latest
+npx @mutoe/eslint-config@latest
 ```
 
 Before running the migration, make sure to commit your unsaved changes first.
@@ -152,22 +168,22 @@ Add the following settings to your `.vscode/settings.json`:
 
 Since v1.0, we migrated to [ESLint Flat config](https://eslint.org/docs/latest/use/configure/configuration-files-new). It provides much better organization and composition.
 
-Normally you only need to import the `antfu` preset:
+Normally you only need to import the `defineConfig` preset:
 
 ```js
 // eslint.config.js
-import antfu from '@antfu/eslint-config'
+import defineConfig from '@mutoe/eslint-config'
 
-export default antfu()
+export default defineConfig()
 ```
 
 And that's it! Or you can configure each integration individually, for example:
 
 ```js
 // eslint.config.js
-import antfu from '@antfu/eslint-config'
+import defineConfig from '@mutoe/eslint-config'
 
-export default antfu({
+export default defineConfig({
   // Enable stylistic formatting rules
   // stylistic: true,
 
@@ -193,13 +209,13 @@ export default antfu({
 })
 ```
 
-The `antfu` factory function also accepts any number of arbitrary custom config overrides:
+The `defineConfig` factory function also accepts any number of arbitrary custom config overrides:
 
 ```js
 // eslint.config.js
-import antfu from '@antfu/eslint-config'
+import defineConfig from '@mutoe/eslint-config'
 
-export default antfu(
+export default defineConfig(
   {
     // Configures for antfu's config
   },
@@ -242,7 +258,7 @@ import {
   unicorn,
   vue,
   yaml,
-} from '@antfu/eslint-config'
+} from '@mutoe/eslint-config'
 
 export default combine(
   ignores(),
@@ -263,7 +279,7 @@ export default combine(
 
 </details>
 
-Check out the [configs](https://github.com/antfu/eslint-config/blob/main/src/configs) and [factory](https://github.com/antfu/eslint-config/blob/main/src/factory.ts) for more details.
+Check out the [configs](https://github.com/mutoe/eslint-config/blob/main/src/configs) and [factory](https://github.com/mutoe/eslint-config/blob/main/src/factory.ts) for more details.
 
 > Thanks to [sxzz/eslint-config](https://github.com/sxzz/eslint-config) for the inspiration and reference.
 
@@ -295,9 +311,9 @@ Certain rules would only be enabled in specific files, for example, `ts/*` rules
 
 ```js
 // eslint.config.js
-import antfu from '@antfu/eslint-config'
+import defineConfig from '@mutoe/eslint-config'
 
-export default antfu(
+export default defineConfig(
   { vue: true, typescript: true },
   {
     // Remember to specify the file glob here, otherwise it might cause the vue plugin to handle non-vue files
@@ -319,9 +335,9 @@ We also provided an `overrides` options to make it easier:
 
 ```js
 // eslint.config.js
-import antfu from '@antfu/eslint-config'
+import defineConfig from '@mutoe/eslint-config'
 
-export default antfu({
+export default defineConfig({
   overrides: {
     vue: {
       'vue/operator-linebreak': ['error', 'before'],
@@ -348,9 +364,9 @@ Use external formatters to format files that ESLint cannot handle yet (`.css`, `
 
 ```js
 // eslint.config.js
-import antfu from '@antfu/eslint-config'
+import defineConfig from '@mutoe/eslint-config'
 
-export default antfu({
+export default defineConfig({
   formatters: {
     /**
      * Format CSS, LESS, SCSS files, also the `<style>` blocks in Vue
@@ -389,9 +405,9 @@ To enable React support, you need to explicitly turn it on:
 
 ```js
 // eslint.config.js
-import antfu from '@antfu/eslint-config'
+import defineConfig from '@mutoe/eslint-config'
 
-export default antfu({
+export default defineConfig({
   react: true,
 })
 ```
@@ -408,9 +424,9 @@ To enable UnoCSS support, you need to explicitly turn it on:
 
 ```js
 // eslint.config.js
-import antfu from '@antfu/eslint-config'
+import defineConfig from '@mutoe/eslint-config'
 
-export default antfu({
+export default defineConfig({
   unocss: true,
 })
 ```
@@ -449,9 +465,9 @@ You can optionally enable the [type aware rules](https://typescript-eslint.io/li
 
 ```js
 // eslint.config.js
-import antfu from '@antfu/eslint-config'
+import defineConfig from '@mutoe/eslint-config'
 
-export default antfu({
+export default defineConfig({
   typescript: {
     tsconfigPath: 'tsconfig.json',
   },
@@ -540,6 +556,7 @@ Sure, you can configure and override rules locally in your project to fit your n
 
 ## Check Also
 
+- [antfu/eslint-config](https://github.com/antfu/eslint-config) - Upstream repository
 - [antfu/dotfiles](https://github.com/antfu/dotfiles) - My dotfiles
 - [antfu/vscode-settings](https://github.com/antfu/vscode-settings) - My VS Code settings
 - [antfu/starter-ts](https://github.com/antfu/starter-ts) - My starter template for TypeScript library
@@ -547,4 +564,4 @@ Sure, you can configure and override rules locally in your project to fit your n
 
 ## License
 
-[MIT](./LICENSE) License &copy; 2019-PRESENT [Anthony Fu](https://github.com/antfu)
+[MIT](./LICENSE) License &copy; 2023-PRESENT [mutoe](https://github.com/mutoe)

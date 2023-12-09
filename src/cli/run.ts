@@ -37,12 +37,12 @@ export async function run(options: RuleOptions = {}) {
     throw new Error('There are uncommitted changes in the current repository, please commit them and try again')
 
   // Update package.json
-  console.log(c.cyan(`${ARROW} bumping @antfu/eslint-config to v${version}`))
+  console.log(c.cyan(`${ARROW} bumping @mutoe/eslint-config to v${version}`))
   const pkgContent = await fsp.readFile(pathPackageJSON, 'utf-8')
   const pkg: Record<string, any> = JSON.parse(pkgContent)
 
   pkg.devDependencies ??= {}
-  pkg.devDependencies['@antfu/eslint-config'] = `^${version}`
+  pkg.devDependencies['@mutoe/eslint-config'] = `^${version}`
 
   if (!pkg.devDependencies.eslint)
     pkg.devDependencies.eslint = eslintVersion
@@ -72,16 +72,16 @@ export async function run(options: RuleOptions = {}) {
   const antfuConfig = `${eslintIgnores.length ? `ignores: ${JSON.stringify(eslintIgnores)}` : ''}`
   if (pkg.type === 'module') {
     eslintConfigContent = `
-import antfu from '@antfu/eslint-config'
+import defineConfig from '@mutoe/eslint-config'
 
-export default antfu({\n${antfuConfig}\n})
+export default defineConfig({\n${antfuConfig}\n})
 `.trimStart()
   }
   else {
     eslintConfigContent = `
-const antfu = require('@antfu/eslint-config').default
+const defineConfig = require('@mutoe/eslint-config').default
 
-module.exports = antfu({\n${antfuConfig}\n})
+module.exports = defineConfig({\n${antfuConfig}\n})
 `.trimStart()
   }
 
