@@ -7,6 +7,7 @@ export async function vue(
   options: OptionsVue & OptionsHasTypeScript & OptionsOverrides & OptionsStylistic & OptionsFiles = {},
 ): Promise<FlatConfigItem[]> {
   const {
+    accessibility = true,
     files = [GLOB_VUE],
     overrides = {},
     stylistic = true,
@@ -25,18 +26,22 @@ export async function vue(
     pluginVue,
     parserVue,
     processorVueBlocks,
+    pluginVueAccessibility,
   ] = await Promise.all([
     // @ts-expect-error missing types
     interopDefault(import('eslint-plugin-vue')),
     interopDefault(import('vue-eslint-parser')),
     interopDefault(import('eslint-processor-vue-blocks')),
+    // @ts-expect-error missing types
+    interopDefault(import('eslint-plugin-vuejs-accessibility')),
   ] as const)
 
   return [
     {
       name: 'antfu:vue:setup',
       plugins: {
-        vue: pluginVue,
+        'vue': pluginVue,
+        'vuejs-accessibility': pluginVueAccessibility,
       },
     },
     {
@@ -81,6 +86,12 @@ export async function vue(
               ...pluginVue.configs['vue3-strongly-recommended'].rules as any,
               ...pluginVue.configs['vue3-recommended'].rules as any,
             },
+
+        ...accessibility
+          ? {
+              ...pluginVueAccessibility.configs.recommended.rules as any,
+            }
+          : {},
 
         'node/prefer-global/process': 'off',
 
