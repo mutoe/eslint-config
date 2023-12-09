@@ -46,6 +46,7 @@ export async function stylistic(options: StylisticConfig = {}): Promise<FlatConf
         'antfu/top-level-function': 'error',
 
         'curly': ['error', 'multi-or-nest', 'consistent'],
+        'style/quotes': ['error', quotes, { allowTemplateLiterals: true, avoidEscape: true }],
       },
     },
   ]

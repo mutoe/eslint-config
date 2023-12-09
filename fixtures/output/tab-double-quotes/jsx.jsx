@@ -1,6 +1,6 @@
 export function HelloWorld({
 	greeting = "hello",
-	greeted = "\"World\"",
+	greeted = '"World"',
 	silent = false,
 	onMouseOver,
 	 }) {

@@ -34,9 +34,12 @@ const multilineString = `
   that spans multiple lines.
 `;
 
+// Quote
+const quoteString = "This is Ming's quote"
+
 // Use destructuring assignment to extract values from an object
 const { name, age } = people[0];
-log(`First person in the array is ${name} and they are ${age} years old.`, multilineString);
+log(`First person in the array is ${name} and they are ${age} years old.`, multilineString, quoteString);
 
 // Use the spread operator to create a new array
 const numbers = [1, 2, 3];
