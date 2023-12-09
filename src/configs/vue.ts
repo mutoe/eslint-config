@@ -139,6 +139,7 @@ export async function vue(
         'vue/prop-name-casing': ['error', 'camelCase'],
         'vue/require-default-prop': 'off',
         'vue/require-prop-types': 'off',
+        'vue/singleline-html-element-content-newline': 'off',
         'vue/space-infix-ops': 'error',
         'vue/space-unary-ops': ['error', { nonwords: false, words: true }],
 

@@ -15,6 +15,7 @@ Based on the version of @Antfu, the following sections have been modified:
 - (Plan) Some of my favorite styles
 - Vue: block order change to ['template', 'script', 'style']
 - Vue: don't allow attribute more than 3 in one line
+- Vue: Allow singleline html element
 
 ---
 
