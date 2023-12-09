@@ -22,6 +22,7 @@ export default defineConfig(
   {
     files: ['{src,test}/**/*.ts'],
     rules: {
+      'import/order': 'off',
       'unicorn/catch-error-name': 'off',
       'unicorn/no-array-for-each': 'off',
       'unicorn/no-array-reduce': 'off',

@@ -16,6 +16,7 @@ Based on the version of @Antfu, the following sections have been modified:
 - Avoid escape quotes in statement
 - Set linebreak-style to `unix`
 - More unicorn rules (very crazy 😈)
+- More sensible `import/order` rules
 - Vue: block order change to ['template', 'script', 'style']
 - Vue: don't allow attribute more than 3 in one line
 - Vue: Allow singleline html element
@@ -72,8 +73,8 @@ Combined with legacy config:
 
 ```js
 // eslint.config.js
-const defineConfig = require('@mutoe/eslint-config').default
 const { FlatCompat } = require('@eslint/eslintrc')
+const defineConfig = require('@mutoe/eslint-config').default
 
 const compat = new FlatCompat()
 
