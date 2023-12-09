@@ -14,6 +14,7 @@ Based on the version of @Antfu, the following sections have been modified:
 - (Plan) Reduce the number of default dependencies
 - (Plan) Some of my favorite styles
 - Avoid escape quotes in statement
+- Set linebreak-style to `unix`
 - Vue: block order change to ['template', 'script', 'style']
 - Vue: don't allow attribute more than 3 in one line
 - Vue: Allow singleline html element
