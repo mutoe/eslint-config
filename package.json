@@ -39,7 +39,8 @@
     "test": "vitest"
   },
   "simple-git-hooks": {
-    "pre-commit": "pnpm lint-staged"
+    "pre-commit": "pnpm lint-staged",
+    "pre-push": "pnpm lint && pnpm vitest run"
   },
   "lint-staged": {
     "*": "eslint --fix"
