@@ -1,7 +1,7 @@
 import globals from 'globals'
-import type { FlatConfigItem, OptionsIsInEditor, OptionsOverrides } from '../types'
-import { pluginAntfu, pluginUnusedImports } from '../plugins'
 import { GLOB_SRC, GLOB_SRC_EXT } from '../globs'
+import { pluginAntfu, pluginUnusedImports } from '../plugins'
+import type { FlatConfigItem, OptionsIsInEditor, OptionsOverrides } from '../types'
 
 export async function javascript(
   options: OptionsIsInEditor & OptionsOverrides = {},
@@ -45,6 +45,11 @@ export async function javascript(
 
         'array-callback-return': 'error',
         'block-scoped-var': 'error',
+        'camelcase': ['error', {
+          allow: ['^(UNSAFE_|unstable_)'],
+          ignoreGlobals: true,
+          properties: 'never',
+        }],
         'constructor-super': 'error',
         'default-case-last': 'error',
         'dot-notation': ['error', { allowKeywords: true }],
