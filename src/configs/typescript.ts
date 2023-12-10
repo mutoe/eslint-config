@@ -23,6 +23,7 @@ export async function typescript(
     'no-implied-eval': 'off',
     'no-throw-literal': 'off',
     'ts/await-thenable': 'error',
+    'ts/consistent-type-assertions': 'error',
     'ts/dot-notation': ['error', { allowKeywords: true }],
     'ts/no-floating-promises': 'error',
     'ts/no-for-in-array': 'error',
