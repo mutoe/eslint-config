@@ -1,3 +1,12 @@
+export function Component1() {
+	const ThisComponent = <div />
+	return (
+		<div>
+			{ ThisComponent }
+		</div>
+	)
+}
+
 export function HelloWorld({
 	greeting = "hello",
 	greeted = '"World"',
@@ -20,7 +29,7 @@ export function HelloWorld({
 			<em>
 				{ greeted }
 			</em>
-			{ (silent) ? "." : "!"}
+			{ silent ? "." : "!"}
 		</div>
 	)
 }

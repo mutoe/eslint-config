@@ -1,8 +1,10 @@
 // Define a TypeScript interface
+type PersonBase = { name: string }
+
 type Person = {
   name: string
   age: number
-}
+} & PersonBase
 
 // Create an array of objects with the defined interface
 const people: Person[] = [

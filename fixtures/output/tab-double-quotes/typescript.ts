@@ -1,5 +1,7 @@
 // Define a TypeScript interface
-interface Person {
+interface PersonBase { name: string }
+
+interface Person extends PersonBase {
 	name: string
 	age: number
 }
