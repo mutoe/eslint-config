@@ -121,6 +121,7 @@ export async function defineConfig(
 
   if (options.test ?? true) {
     configs.push(test({
+      cypress: typeof options.test === 'object' ? options.test.cypress : false,
       isInEditor,
       overrides: overrides.test,
     }))

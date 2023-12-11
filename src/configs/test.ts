@@ -1,23 +1,30 @@
-import { interopDefault } from '../utils'
-import type { FlatConfigItem, OptionsFiles, OptionsIsInEditor, OptionsOverrides } from '../types'
-import { GLOB_TESTS } from '../globs'
+import { ensurePackages, interopDefault } from '../utils'
+import type { FlatConfigItem, OptionsCypress, OptionsFiles, OptionsIsInEditor, OptionsOverrides } from '../types'
+import { GLOB_SRC_EXT, GLOB_TESTS } from '../globs'
 
 export async function test(
-  options: OptionsFiles & OptionsIsInEditor & OptionsOverrides = {},
+  options: OptionsFiles & OptionsIsInEditor & OptionsOverrides & OptionsCypress = {},
 ): Promise<FlatConfigItem[]> {
   const {
+    cypress = false,
     files = GLOB_TESTS,
     isInEditor = false,
     overrides = {},
   } = options
 
+  if (cypress)
+    await ensurePackages(['eslint-plugin-cypress'])
+
   const [
     pluginVitest,
     pluginNoOnlyTests,
+    pluginCypress,
   ] = await Promise.all([
     interopDefault(import('eslint-plugin-vitest')),
     // @ts-expect-error missing types
     interopDefault(import('eslint-plugin-no-only-tests')),
+    // @ts-expect-error missing types
+    cypress ? interopDefault(import('eslint-plugin-cypress')) : undefined,
   ] as const)
 
   return [
@@ -26,10 +33,12 @@ export async function test(
       plugins: {
         test: {
           ...pluginVitest,
+          ...pluginCypress,
           rules: {
             ...pluginVitest.rules,
             // extend `test/no-only-tests` rule
             ...pluginNoOnlyTests.rules,
+            ...cypress ? pluginCypress.configs.recommended.rules : {},
           },
         },
       },
@@ -46,8 +55,20 @@ export async function test(
         'test/prefer-hooks-in-order': 'error',
         'test/prefer-lowercase-title': 'error',
 
+        'ts/no-unsafe-assignment': 'off',
+        'ts/no-unsafe-member-access': 'off',
+        'ts/unbound-method': 'off',
+
         ...overrides,
       },
     },
+    cypress
+      ? {
+          files: [`**/cypress/support/**/*.${GLOB_SRC_EXT}`],
+          rules: {
+            'ts/no-namespace': 'off',
+          },
+        }
+      : {},
   ]
 }

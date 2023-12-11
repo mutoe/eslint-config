@@ -44,6 +44,9 @@ importers:
       eslint-plugin-antfu:
         specifier: ^2.0.0
         version: 2.0.0(eslint@8.55.0)
+      eslint-plugin-cypress:
+        specifier: '>=2.0.0'
+        version: 2.15.1(eslint@8.55.0)
       eslint-plugin-eslint-comments:
         specifier: ^3.2.0
         version: 3.2.0(eslint@8.55.0)
@@ -2327,6 +2330,15 @@ packages:
       eslint: '*'
     dependencies:
       eslint: 8.55.0
+    dev: false
+
+  /eslint-plugin-cypress@2.15.1(eslint@8.55.0):
+    resolution: {integrity: sha512-eLHLWP5Q+I4j2AWepYq0PgFEei9/s5LvjuSqWrxurkg1YZ8ltxdvMNmdSf0drnsNo57CTgYY/NIHHLRSWejR7w==}
+    peerDependencies:
+      eslint: '>= 3.2.1'
+    dependencies:
+      eslint: 8.55.0
+      globals: 13.23.0
     dev: false
 
   /eslint-plugin-es-x@7.2.0(eslint@8.55.0):
