@@ -1,5 +1,5 @@
 import { mergeProcessors } from 'eslint-merge-processors'
-import { interopDefault } from '../utils'
+import { changeLevel, interopDefault } from '../utils'
 import type { FlatConfigItem, OptionsFiles, OptionsHasTypeScript, OptionsOverrides, OptionsStylistic, OptionsVue } from '../types'
 import { GLOB_VUE } from '../globs'
 
@@ -91,7 +91,7 @@ export async function vue(
 
         ...accessibility
           ? {
-              ...pluginVueAccessibility.configs.recommended.rules as any,
+              ...changeLevel(pluginVueAccessibility.configs.recommended.rules, 'error', 'warn'),
             }
           : {},
 
