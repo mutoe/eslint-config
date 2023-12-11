@@ -85,6 +85,8 @@ export async function vue(
               ...pluginVue.configs['vue3-essential'].rules as any,
               ...pluginVue.configs['vue3-strongly-recommended'].rules as any,
               ...pluginVue.configs['vue3-recommended'].rules as any,
+
+              'ts/no-use-before-define': 'off',
             },
 
         ...accessibility

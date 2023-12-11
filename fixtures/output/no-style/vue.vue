@@ -20,8 +20,13 @@
 // Define reactive data and props
 import { ref  } from 'vue';
 
+defineExpose({
+  plusOne () { counter.value++;
+   }
+})
+
 const greeting = ref(`Hello, Vue 3!${  1}`);
-const counter = ref(0)
+let counter = ref(0)
 
 // Define a function
 const incrementCounter = () => {

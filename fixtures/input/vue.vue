@@ -12,6 +12,11 @@
 // Define reactive data and props
 import { ref  } from '@vue/reactivity';
 
+defineExpose({
+  plusOne () { counter.value++;
+   }
+})
+
 const greeting = ref('Hello, Vue 3!' + 1);
 let counter = ref(0)
 
