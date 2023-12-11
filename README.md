@@ -2,10 +2,9 @@
 
 > Forked from [antfu/eslint-config](https://github.com/antfu/eslint-config)
 
-[![npm](https://img.shields.io/npm/v/@mutoe/eslint-config?color=444&label=mutoe/eslint-config)](https://npmjs.com/package/@mutoe/eslint-config)
-[![npm](https://img.shields.io/npm/v/@antfu/eslint-config?color=444&label=Upstream)](https://npmjs.com/package/@antfu/eslint-config)
-
 [![code style](https://antfu.me/badge-code-style.svg)](https://github.com/antfu/eslint-config)
+[![npm](https://img.shields.io/npm/v/@mutoe/eslint-config?color=blue&label=npm)](https://npmjs.com/package/@mutoe/eslint-config)
+[![npm](https://img.shields.io/npm/v/@antfu/eslint-config?color=888&label=upstream)](https://npmjs.com/package/@antfu/eslint-config)
 
 Based on the version of @Antfu, the following sections have been modified:
 
