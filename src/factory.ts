@@ -17,6 +17,7 @@ import {
   sortTsconfig,
   stylistic,
   test,
+  toml,
   typescript,
   unicorn,
   unocss,
@@ -165,6 +166,13 @@ export async function defineConfig(
   if (options.yaml ?? true) {
     configs.push(yaml({
       overrides: overrides.yaml,
+      stylistic: stylisticOptions,
+    }))
+  }
+
+  if (options.toml ?? true) {
+    configs.push(toml({
+      overrides: overrides.toml,
       stylistic: stylisticOptions,
     }))
   }

@@ -1,6 +1,6 @@
-// @ts-check
+// @ts-expect-error missing types
 import styleMigrate from '@stylistic/eslint-plugin-migrate'
-import defineConfig from './dist/index.js'
+import defineConfig from './src'
 
 export default defineConfig(
   {
