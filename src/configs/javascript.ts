@@ -214,7 +214,7 @@ export async function javascript(
         ],
         'use-isnan': ['error', { enforceForIndexOf: true, enforceForSwitchCase: true }],
         'valid-typeof': ['error', { requireStringLiterals: true }],
-        'vars-on-top': 'error',
+        'vars-on-top': 'off', // redundant with `no-var`
         'yoda': ['error', 'never'],
 
         ...overrides,
