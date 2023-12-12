@@ -12,8 +12,8 @@
   ],
   "homepage": "https://github.com/mutoe/eslint-config",
   "packageManager": "pnpm@8.12.0",
-  "bin": "./bin/index.js",
   "type": "module",
+  "bin": "./bin/index.js",
   "exports": {
     ".": {
       "import": "./dist/index.js",
@@ -37,13 +37,6 @@
     "typecheck": "tsc --noEmit",
     "lint": "eslint .",
     "test": "vitest"
-  },
-  "simple-git-hooks": {
-    "pre-commit": "pnpm lint-staged",
-    "pre-push": "pnpm lint && pnpm vitest run"
-  },
-  "lint-staged": {
-    "*": "eslint --fix"
   },
   "peerDependencies": {
     "@unocss/eslint-plugin": ">=0.50.0",
@@ -172,5 +165,12 @@
     "vitest": "^1.0.4",
     "vue": "^3.3.11",
     "vue-eslint-parser": "^9.3.2"
+  },
+  "simple-git-hooks": {
+    "pre-commit": "pnpm lint-staged",
+    "pre-push": "pnpm lint && pnpm vitest run"
+  },
+  "lint-staged": {
+    "*": "eslint --fix"
   }
 }

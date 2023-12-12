@@ -33,11 +33,13 @@ export async function sortPackageJson(): Promise<FlatConfigItem[]> {
           'warn',
           {
             order: [
-              'publisher',
               'name',
               'displayName',
+              'publisher',
               'private',
+              'publishConfig',
               'version',
+
               'description',
               'license',
               'author',
@@ -51,13 +53,13 @@ export async function sortPackageJson(): Promise<FlatConfigItem[]> {
               'repository',
               'bugs',
 
+              'engines',
               'packageManager',
-              'publishConfig',
-              'bin',
               'workspaces',
               'type',
               'os',
               'cpu',
+              'bin',
               'exports',
               'main',
               'module',
@@ -69,14 +71,8 @@ export async function sortPackageJson(): Promise<FlatConfigItem[]> {
               'icon',
               'files',
               'sideEffects',
-
-              'engines',
               'activationEvents',
               'scripts',
-              'gitHooks',
-              'husky',
-              'simple-git-hooks',
-              'lint-staged',
 
               'peerDependencies',
               'peerDependenciesMeta',
@@ -88,6 +84,10 @@ export async function sortPackageJson(): Promise<FlatConfigItem[]> {
               'overrides',
               'resolutions',
 
+              'gitHooks',
+              'husky',
+              'simple-git-hooks',
+              'lint-staged',
               'changelog',
 
               'config',
