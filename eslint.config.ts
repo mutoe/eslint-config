@@ -24,6 +24,7 @@ export default defineConfig(
     rules: {
       'import/order': 'off',
       'style/linebreak-style': 'off',
+      'style/arrow-parens': 'off',
       'unicorn/catch-error-name': 'off',
       'unicorn/no-array-for-each': 'off',
       'unicorn/no-array-reduce': 'off',

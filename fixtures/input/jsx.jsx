@@ -1,5 +1,5 @@
 export function Component1(){
-  const ThisComponent = (<div />)
+  const ThisComponent = text => <div>{text }</div>
   return (<div>
     {  ThisComponent  }
   </div>);

@@ -47,6 +47,7 @@ export async function stylistic(options: StylisticConfig = {}): Promise<FlatConf
 
         'curly': ['error', 'multi-or-nest', 'consistent'],
 
+        'style/arrow-parens': ['error', 'as-needed', { requireForBlockBody: false }],
         'style/linebreak-style': ['error', 'unix'],
         'style/no-extra-parens': ['error', 'all', {
           ignoreJSX: 'multi-line',
