@@ -62,7 +62,7 @@ export async function javascript(
         'no-case-declarations': 'error',
         'no-class-assign': 'error',
         'no-compare-neg-zero': 'error',
-        'no-cond-assign': ['error', 'always'],
+        'no-cond-assign': ['error', 'except-parens'],
         'no-console': ['error', { allow: ['warn', 'error'] }],
         'no-const-assign': 'error',
         'no-control-regex': 'error',
