@@ -4,6 +4,7 @@ import { isPackageExists } from 'local-pkg'
 import type { Awaitable, FlatConfigItem, OptionsConfig, UserConfigItem } from './types'
 import {
   comments,
+  formatters,
   ignores,
   imports,
   javascript,
@@ -25,7 +26,6 @@ import {
   yaml,
 } from './configs'
 import { combine, interopDefault } from './utils'
-import { formatters } from './configs/formatters'
 
 const flatConfigProps: (keyof FlatConfigItem)[] = [
   'files',
@@ -57,9 +57,9 @@ export async function defineConfig(
     gitignore: enableGitignore = true,
     isInEditor = !!((process.env.VSCODE_PID || process.env.JETBRAINS_IDE) && !process.env.CI),
     overrides = {},
-    react: enableReact = false,
+    react: enableReact = isPackageExists('react'),
     typescript: enableTypeScript = isPackageExists('typescript'),
-    unocss: enableUnoCSS = false,
+    unocss: enableUnoCSS = isPackageExists('unocss'),
     vue: enableVue = VuePackages.some(i => isPackageExists(i)),
   } = options
 
@@ -170,7 +170,7 @@ export async function defineConfig(
     }))
   }
 
-  if (options.toml ?? true) {
+  if (options.toml ?? false) {
     configs.push(toml({
       overrides: overrides.toml,
       stylistic: stylisticOptions,

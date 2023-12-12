@@ -1,5 +1,5 @@
 import { mergeProcessors } from 'eslint-merge-processors'
-import { changeLevel, interopDefault } from '../utils'
+import { changeLevel, ensurePackages, interopDefault } from '../utils'
 import type { FlatConfigItem, OptionsFiles, OptionsHasTypeScript, OptionsOverrides, OptionsStylistic, OptionsVue } from '../types'
 import { GLOB_VUE } from '../globs'
 
@@ -7,7 +7,7 @@ export async function vue(
   options: OptionsVue & OptionsHasTypeScript & OptionsOverrides & OptionsStylistic & OptionsFiles = {},
 ): Promise<FlatConfigItem[]> {
   const {
-    accessibility = true,
+    accessibility = false,
     files = [GLOB_VUE],
     overrides = {},
     stylistic = true,
@@ -22,6 +22,13 @@ export async function vue(
     indent = 2,
   } = typeof stylistic === 'boolean' ? {} : stylistic
 
+  await ensurePackages([
+    'eslint-plugin-vue',
+    'vue-eslint-parser',
+    'eslint-processor-vue-blocks',
+    accessibility ? 'eslint-plugin-vuejs-accessibility' : '',
+  ])
+
   const [
     pluginVue,
     parserVue,
@@ -33,15 +40,17 @@ export async function vue(
     interopDefault(import('vue-eslint-parser')),
     interopDefault(import('eslint-processor-vue-blocks')),
     // @ts-expect-error missing types
-    interopDefault(import('eslint-plugin-vuejs-accessibility')),
+    accessibility ? interopDefault(import('eslint-plugin-vuejs-accessibility')) : undefined,
   ] as const)
 
   return [
     {
       name: 'antfu:vue:setup',
       plugins: {
-        'vue': pluginVue,
-        'vuejs-accessibility': pluginVueAccessibility,
+        vue: pluginVue,
+        ...accessibility && {
+          'vuejs-accessibility': pluginVueAccessibility,
+        },
       },
     },
     {
@@ -89,11 +98,7 @@ export async function vue(
               'ts/no-use-before-define': 'off',
             },
 
-        ...accessibility
-          ? {
-              ...changeLevel(pluginVueAccessibility.configs.recommended.rules, 'error', 'warn'),
-            }
-          : {},
+        ...accessibility && changeLevel(pluginVueAccessibility.configs.recommended.rules, 'error', 'warn'),
 
         'node/prefer-global/process': 'off',
 

@@ -193,13 +193,9 @@ export interface OptionsIsInEditor {
   isInEditor?: boolean
 }
 
-export interface OptionsCypress {
-  /**
-   * Enable Cypress support.
-   *
-   * @default false
-   */
+export interface OptionsTestFrameworks {
   cypress?: boolean
+  vitest?: boolean
 }
 
 export interface OptionsUnoCSS {
@@ -249,7 +245,7 @@ export interface OptionsConfig extends OptionsComponentExts {
    *
    * @default true
    */
-  test?: boolean | OptionsCypress
+  test?: boolean | OptionsTestFrameworks
 
   /**
    * Enable Vue support.

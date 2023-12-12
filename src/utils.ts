@@ -34,7 +34,7 @@ export async function ensurePackages(packages: string[]) {
   if (process.env.CI || process.stdout.isTTY === false)
     return
 
-  const nonExistingPackages = packages.filter(i => !isPackageExists(i))
+  const nonExistingPackages = packages.filter(Boolean).filter(i => !isPackageExists(i))
   if (nonExistingPackages.length === 0)
     return
 

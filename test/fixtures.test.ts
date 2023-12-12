@@ -19,11 +19,13 @@ runWithConfig('js', {
 runWithConfig('all', {
   typescript: true,
   vue: true,
+  toml: true,
 })
 runWithConfig('no-style', {
   typescript: true,
   vue: true,
   stylistic: false,
+  toml: true,
 })
 runWithConfig(
   'tab-double-quotes',
@@ -34,6 +36,7 @@ runWithConfig(
       indent: 'tab',
       quotes: 'double',
     },
+    toml: true,
   },
   {
     rules: {
@@ -61,6 +64,7 @@ runWithConfig(
     typescript: true,
     vue: true,
     formatters: true,
+    toml: true,
   },
 )
 

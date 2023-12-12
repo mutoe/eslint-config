@@ -10,7 +10,7 @@ Based on the version of @Antfu, the following sections have been modified:
 
 - Update default package name to `defineConfig`
 - Supplement more `package.json` properties ordering rules
-- (Plan) Reduce the number of default dependencies
+- Reduce the number of default dependencies (auto-detect vue, react, vitest, cypress)
 - More unicorn rules (very crazy 😈)
 - More sensible `import/order` rules
 - Only allow camelcase in variable names

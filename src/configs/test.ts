@@ -1,26 +1,30 @@
 import { ensurePackages, interopDefault } from '../utils'
-import type { FlatConfigItem, OptionsCypress, OptionsFiles, OptionsIsInEditor, OptionsOverrides } from '../types'
+import type { FlatConfigItem, OptionsFiles, OptionsIsInEditor, OptionsOverrides, OptionsTestFrameworks } from '../types'
 import { GLOB_SRC_EXT, GLOB_TESTS } from '../globs'
+import { isPackageExists } from 'local-pkg'
 
 export async function test(
-  options: OptionsFiles & OptionsIsInEditor & OptionsOverrides & OptionsCypress = {},
+  options: OptionsFiles & OptionsIsInEditor & OptionsOverrides & OptionsTestFrameworks = {},
 ): Promise<FlatConfigItem[]> {
   const {
-    cypress = false,
+    cypress = isPackageExists('cypress'),
     files = GLOB_TESTS,
     isInEditor = false,
     overrides = {},
+    vitest = isPackageExists('vitest'),
   } = options
 
-  if (cypress)
-    await ensurePackages(['eslint-plugin-cypress'])
+  await ensurePackages([
+    cypress ? 'eslint-plugin-cypress' : '',
+    vitest ? 'eslint-plugin-vitest' : '',
+  ])
 
   const [
     pluginVitest,
     pluginNoOnlyTests,
     pluginCypress,
   ] = await Promise.all([
-    interopDefault(import('eslint-plugin-vitest')),
+    vitest ? interopDefault(import('eslint-plugin-vitest')) : undefined,
     // @ts-expect-error missing types
     interopDefault(import('eslint-plugin-no-only-tests')),
     // @ts-expect-error missing types
@@ -35,10 +39,10 @@ export async function test(
           ...pluginVitest,
           ...pluginCypress,
           rules: {
-            ...pluginVitest.rules,
+            ...pluginVitest && pluginVitest.rules,
             // extend `test/no-only-tests` rule
             ...pluginNoOnlyTests.rules,
-            ...cypress ? pluginCypress.configs.recommended.rules : {},
+            ...pluginCypress && pluginCypress.configs.recommended.rules,
           },
         },
       },
