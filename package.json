@@ -1,6 +1,6 @@
 {
   "name": "@mutoe/eslint-config",
-  "version": "2.4.7",
+  "version": "2.4.8",
   "description": "Mutoe's ESLint config (forked from antfu/eslint-config)",
   "license": "MIT",
   "author": "mutoe <imutoe@gmail.com> (https://github.com/mutoe/)",
