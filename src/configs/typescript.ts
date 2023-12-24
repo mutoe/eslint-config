@@ -2,7 +2,7 @@ import process from 'node:process'
 import type { FlatConfigItem, OptionsComponentExts, OptionsFiles, OptionsOverrides, OptionsTypeScriptParserOptions, OptionsTypeScriptWithTypes } from '../types'
 import { GLOB_SRC } from '../globs'
 import { pluginAntfu } from '../plugins'
-import { interopDefault, renameRules, toArray } from '../utils'
+import { changeLevel, interopDefault, renameRules, toArray } from '../utils'
 
 export async function typescript(
   options: OptionsFiles & OptionsComponentExts & OptionsOverrides & OptionsTypeScriptWithTypes & OptionsTypeScriptParserOptions = {},
@@ -144,6 +144,8 @@ export async function typescript(
       rules: {
         'ts/no-require-imports': 'off',
         'ts/no-var-requires': 'off',
+
+        ...changeLevel(typeAwareRules, 'error', 'off'),
       },
     },
   ]
