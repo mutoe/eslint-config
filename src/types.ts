@@ -213,6 +213,11 @@ export interface OptionsUnoCSS {
 
 export interface OptionsConfig extends OptionsComponentExts {
   /**
+   * Ignore files and directories by glob patterns.
+   */
+  ignores?: string[]
+
+  /**
    * Enable gitignore support.
    *
    * Passing an object to configure the options.

@@ -55,6 +55,7 @@ export async function defineConfig(
   const {
     componentExts = [],
     gitignore: enableGitignore = true,
+    ignores: userIgnores = [],
     isInEditor = !!((process.env.VSCODE_PID || process.env.JETBRAINS_IDE || process.env.VIM) && !process.env.CI),
     overrides = {},
     react: enableReact = isPackageExists('react'),
@@ -85,7 +86,7 @@ export async function defineConfig(
 
   // Base configs
   configs.push(
-    ignores(),
+    ignores(userIgnores),
     javascript({
       isInEditor,
       overrides: overrides.javascript,

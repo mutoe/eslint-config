@@ -15,13 +15,15 @@ Based on the version of @Antfu, the following sections have been modified:
 - More sensible `import/order` rules
 - Only allow camelcase in variable names
 - TypeScript: consistent type assertions (use `xxx as T` instead of `<T>xxx`)
+- TypeScript: ignore js files for type aware rules
 - Vue: block order change to ['template', 'script', 'style']
 - Vue: don't allow attribute more than 3 in one line
 - Vue: Allow singleline html element
-- Test: Support Cypress recommendation rules (optional, enable it by update config `test: { cypress: true }`)
-- Style: Set linebreak-style to `unix`
-- Style: No extra parens
-- Style: Avoid escape quotes in statement
+- Test: support Cypress recommendation rules (optional, enable it by update config `test: { cypress: true }`)
+- Style: set linebreak-style to `unix`
+- Style: no extra parens
+- Style: avoid escape quotes in statement
+- Fix: `ignores` option is not working issue
 
 ---
 
