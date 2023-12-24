@@ -55,7 +55,7 @@ export async function defineConfig(
   const {
     componentExts = [],
     gitignore: enableGitignore = true,
-    isInEditor = !!((process.env.VSCODE_PID || process.env.JETBRAINS_IDE) && !process.env.CI),
+    isInEditor = !!((process.env.VSCODE_PID || process.env.JETBRAINS_IDE || process.env.VIM) && !process.env.CI),
     overrides = {},
     react: enableReact = isPackageExists('react'),
     typescript: enableTypeScript = isPackageExists('typescript'),
