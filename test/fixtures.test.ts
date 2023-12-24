@@ -15,28 +15,56 @@ afterAll(async () => {
 runWithConfig('js', {
   typescript: false,
   vue: false,
+  react: false,
 })
 runWithConfig('all', {
   typescript: true,
   vue: true,
   toml: true,
+  react: true,
+  overrides: {
+    react: {
+      'react/no-unescaped-entities': 'off',
+      'react/prop-types': 'off',
+      'react/no-unknown-property': 'off',
+      'react-refresh/only-export-components': 'off',
+    },
+  },
 })
 runWithConfig('no-style', {
   typescript: true,
   vue: true,
+  react: true,
   stylistic: false,
   toml: true,
+  overrides: {
+    react: {
+      'react/no-unescaped-entities': 'off',
+      'react/prop-types': 'off',
+      'react/no-unknown-property': 'off',
+      'react-refresh/only-export-components': 'off',
+    },
+  },
 })
 runWithConfig(
   'tab-double-quotes',
   {
     typescript: true,
     vue: true,
+    react: true,
     stylistic: {
       indent: 'tab',
       quotes: 'double',
     },
     toml: true,
+    overrides: {
+      react: {
+        'react/no-unescaped-entities': 'off',
+        'react/prop-types': 'off',
+        'react/no-unknown-property': 'off',
+        'react-refresh/only-export-components': 'off',
+      },
+    },
   },
   {
     rules: {
@@ -50,6 +78,16 @@ runWithConfig(
   'ts-override',
   {
     typescript: true,
+    vue: true,
+    react: true,
+    overrides: {
+      react: {
+        'react/no-unescaped-entities': 'off',
+        'react/prop-types': 'off',
+        'react/no-unknown-property': 'off',
+        'react-refresh/only-export-components': 'off',
+      },
+    },
   },
   {
     rules: {
@@ -63,8 +101,17 @@ runWithConfig(
   {
     typescript: true,
     vue: true,
+    react: true,
     formatters: true,
     toml: true,
+    overrides: {
+      react: {
+        'react/no-unescaped-entities': 'off',
+        'react/prop-types': 'off',
+        'react/no-unknown-property': 'off',
+        'react-refresh/only-export-components': 'off',
+      },
+    },
   },
 )
 
@@ -73,6 +120,7 @@ runWithConfig(
   {
     jsx: false,
     vue: false,
+    react: false,
     markdown: false,
     formatters: {
       markdown: true,
