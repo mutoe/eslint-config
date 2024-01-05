@@ -53,12 +53,15 @@ export async function test(
       rules: {
         'node/prefer-global/process': 'off',
 
-        'test/consistent-test-it': ['error', { fn: 'it', withinDescribe: 'it' }],
-        'test/no-identical-title': 'error',
-        'test/no-import-node-test': 'error',
         'test/no-only-tests': isInEditor ? 'off' : 'error',
-        'test/prefer-hooks-in-order': 'error',
-        'test/prefer-lowercase-title': 'error',
+
+        ...vitest && {
+          'test/consistent-test-it': ['error', { fn: 'it', withinDescribe: 'it' }],
+          'test/no-identical-title': 'error',
+          'test/no-import-node-test': 'error',
+          'test/prefer-hooks-in-order': 'error',
+          'test/prefer-lowercase-title': 'error',
+        },
 
         'ts/no-unsafe-assignment': 'off',
         'ts/no-unsafe-member-access': 'off',

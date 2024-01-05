@@ -129,6 +129,7 @@ export async function defineConfig(
       cypress: typeof options.test === 'object' ? options.test.cypress : false,
       isInEditor,
       overrides: getOverrides(options, 'test'),
+      vitest: typeof options.test === 'object' ? options.test.vitest : false,
     }))
   }
 
