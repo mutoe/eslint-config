@@ -17,6 +17,7 @@ import {
   sortPackageJson,
   sortTsconfig,
   stylistic,
+  svelte,
   test,
   toml,
   typescript,
@@ -57,8 +58,8 @@ export async function defineConfig(
     gitignore: enableGitignore = true,
     ignores: userIgnores = [],
     isInEditor = !!((process.env.VSCODE_PID || process.env.JETBRAINS_IDE || process.env.VIM) && !process.env.CI),
-    overrides = {},
     react: enableReact = isPackageExists('react'),
+    svelte: enableSvelte = isPackageExists('svelte'),
     typescript: enableTypeScript = isPackageExists('typescript'),
     unocss: enableUnoCSS = isPackageExists('unocss'),
     vue: enableVue = VuePackages.some(i => isPackageExists(i)),
@@ -69,6 +70,7 @@ export async function defineConfig(
     : typeof options.stylistic === 'object'
       ? options.stylistic
       : {}
+
   if (stylisticOptions && !('jsx' in stylisticOptions))
     stylisticOptions.jsx = options.jsx ?? true
 
@@ -89,7 +91,7 @@ export async function defineConfig(
     ignores(userIgnores),
     javascript({
       isInEditor,
-      overrides: overrides.javascript,
+      overrides: getOverrides(options, 'javascript'),
     }),
     comments(),
     node(),
@@ -110,31 +112,29 @@ export async function defineConfig(
 
   if (enableTypeScript) {
     configs.push(typescript({
-      ...typeof enableTypeScript !== 'boolean'
-        ? enableTypeScript
-        : {},
+      ...resolveSubOptions(options, 'typescript'),
       componentExts,
-      overrides: overrides.typescript,
     }))
   }
 
-  if (stylisticOptions)
-    configs.push(stylistic(stylisticOptions))
+  if (stylisticOptions) {
+    configs.push(stylistic({
+      ...stylisticOptions,
+      overrides: getOverrides(options, 'stylistic'),
+    }))
+  }
 
   if (options.test ?? true) {
     configs.push(test({
       cypress: typeof options.test === 'object' ? options.test.cypress : false,
       isInEditor,
-      overrides: overrides.test,
+      overrides: getOverrides(options, 'test'),
     }))
   }
 
   if (enableVue) {
     configs.push(vue({
-      ...typeof enableVue !== 'boolean'
-        ? enableVue
-        : {},
-      overrides: overrides.vue,
+      ...resolveSubOptions(options, 'vue'),
       stylistic: stylisticOptions,
       typescript: !!enableTypeScript,
     }))
@@ -142,21 +142,30 @@ export async function defineConfig(
 
   if (enableReact) {
     configs.push(react({
-      overrides: overrides.react,
+      overrides: getOverrides(options, 'react'),
+      typescript: !!enableTypeScript,
+    }))
+  }
+
+  if (enableSvelte) {
+    configs.push(svelte({
+      overrides: getOverrides(options, 'svelte'),
+      stylistic: stylisticOptions,
       typescript: !!enableTypeScript,
     }))
   }
 
   if (enableUnoCSS) {
-    configs.push(unocss(
-      typeof enableUnoCSS === 'boolean' ? {} : enableUnoCSS,
-    ))
+    configs.push(unocss({
+      ...resolveSubOptions(options, 'unocss'),
+      overrides: getOverrides(options, 'unocss'),
+    }))
   }
 
   if (options.jsonc ?? true) {
     configs.push(
       jsonc({
-        overrides: overrides.jsonc,
+        overrides: getOverrides(options, 'jsonc'),
         stylistic: stylisticOptions,
       }),
       sortPackageJson(),
@@ -166,14 +175,14 @@ export async function defineConfig(
 
   if (options.yaml ?? true) {
     configs.push(yaml({
-      overrides: overrides.yaml,
+      overrides: getOverrides(options, 'yaml'),
       stylistic: stylisticOptions,
     }))
   }
 
   if (options.toml ?? false) {
     configs.push(toml({
-      overrides: overrides.toml,
+      overrides: getOverrides(options, 'toml'),
       stylistic: stylisticOptions,
     }))
   }
@@ -183,7 +192,7 @@ export async function defineConfig(
       markdown(
         {
           componentExts,
-          overrides: overrides.markdown,
+          overrides: getOverrides(options, 'markdown'),
         },
       ),
     )
@@ -212,4 +221,30 @@ export async function defineConfig(
   )
 
   return merged
+}
+
+export type ResolvedOptions<T> = T extends boolean
+  ? never
+  : NonNullable<T>
+
+export function resolveSubOptions<K extends keyof OptionsConfig>(
+  options: OptionsConfig,
+  key: K,
+): ResolvedOptions<OptionsConfig[K]> {
+  return typeof options[key] === 'boolean'
+    ? {} as any
+    : options[key] || {}
+}
+
+export function getOverrides<K extends keyof OptionsConfig>(
+  options: OptionsConfig,
+  key: K,
+) {
+  const sub = resolveSubOptions(options, key)
+  return {
+    ...(options.overrides as any)?.[key],
+    ...'overrides' in sub
+      ? sub.overrides
+      : {},
+  }
 }

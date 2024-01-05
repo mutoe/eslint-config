@@ -1,6 +1,6 @@
 import process from 'node:process'
+import { GLOB_SRC, GLOB_TS, GLOB_TSX } from '../globs'
 import type { FlatConfigItem, OptionsComponentExts, OptionsFiles, OptionsOverrides, OptionsTypeScriptParserOptions, OptionsTypeScriptWithTypes } from '../types'
-import { GLOB_SRC } from '../globs'
 import { pluginAntfu } from '../plugins'
 import { interopDefault, renameRules, toArray } from '../utils'
 
@@ -17,6 +17,8 @@ export async function typescript(
     GLOB_SRC,
     ...componentExts.map(ext => `**/*.${ext}`),
   ]
+
+  const filesTypeAware = options.filesTypeAware ?? [GLOB_TS, GLOB_TSX]
 
   const typeAwareRules: FlatConfigItem['rules'] = {
     'dot-notation': 'off',
@@ -90,7 +92,6 @@ export async function typescript(
           '@typescript-eslint/',
           'ts/',
         ),
-
         'no-dupe-class-members': 'off',
         'no-loss-of-precision': 'off',
         'no-redeclare': 'off',
@@ -116,7 +117,13 @@ export async function typescript(
         'ts/prefer-ts-expect-error': 'error',
         'ts/triple-slash-reference': 'off',
         'ts/unified-signatures': 'off',
-
+        ...overrides,
+      },
+    },
+    {
+      files: filesTypeAware,
+      name: 'antfu:typescript:rules-type-aware',
+      rules: {
         ...tsconfigPath ? typeAwareRules : {},
         ...overrides,
       },
