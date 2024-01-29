@@ -176,7 +176,7 @@ export async function javascript(
         'prefer-arrow-callback': [
           'error',
           {
-            allowNamedFunctions: false,
+            allowNamedFunctions: true,
             allowUnboundThis: true,
           },
         ],

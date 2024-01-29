@@ -14,6 +14,7 @@ Based on the version of @Antfu, the following sections have been modified:
 - More unicorn rules (very crazy 😈)
 - More sensible `import/order` rules
 - Only allow camelcase in variable names
+- JavaScript: allow named function as callback (for error stack trace readability)
 - TypeScript: consistent type assertions (use `xxx as T` instead of `<T>xxx`)
 - Vue: block order change to ['template', 'script', 'style']
 - Vue: don't allow attribute more than 3 in one line
