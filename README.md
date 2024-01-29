@@ -18,6 +18,7 @@ Based on the version of @Antfu, the following sections have been modified:
 - Vue: block order change to ['template', 'script', 'style']
 - Vue: don't allow attribute more than 3 in one line
 - Vue: Allow singleline html element
+- JSX: allow multiple element in one line
 - Test: support Cypress recommendation rules (optional, enable it by update config `test: { cypress: true }`)
 - Style: set linebreak-style to `unix`
 - Style: no extra parens

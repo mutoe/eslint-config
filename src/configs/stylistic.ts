@@ -51,6 +51,7 @@ export async function stylistic(
         'curly': ['error', 'multi-or-nest', 'consistent'],
 
         'style/arrow-parens': ['error', 'as-needed', { requireForBlockBody: false }],
+        'style/jsx-one-expression-per-line': 'off',
         'style/linebreak-style': ['error', 'unix'],
         'style/no-extra-parens': ['error', 'all', {
           ignoreJSX: 'all',
