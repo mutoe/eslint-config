@@ -53,7 +53,7 @@ export async function stylistic(
         'style/arrow-parens': ['error', 'as-needed', { requireForBlockBody: false }],
         'style/linebreak-style': ['error', 'unix'],
         'style/no-extra-parens': ['error', 'all', {
-          ignoreJSX: 'multi-line',
+          ignoreJSX: 'all',
           nestedBinaryExpressions: false,
           returnAssign: false,
           ternaryOperandBinaryExpressions: false,
