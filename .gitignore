@@ -76,6 +76,7 @@ dist
 
 # IDE
 .idea
+.DS_Store
 
 *.lerna_backup
 _fixtures

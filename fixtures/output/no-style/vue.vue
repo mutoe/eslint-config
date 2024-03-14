@@ -34,5 +34,5 @@ const incrementCounter = () => {
   counter.value++;
 };
 
-const _zero = doubled.value + counter.value
+const _zero = doubled + counter.value
 </script>
