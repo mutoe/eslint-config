@@ -3,6 +3,7 @@ import fs from 'node:fs'
 import { isPackageExists } from 'local-pkg'
 import type { Awaitable, FlatConfigItem, OptionsConfig, UserConfigItem } from './types'
 import {
+  astro,
   comments,
   formatters,
   ignores,
@@ -29,6 +30,7 @@ import {
 import { combine, interopDefault } from './utils'
 
 const flatConfigProps: (keyof FlatConfigItem)[] = [
+  'name',
   'files',
   'ignores',
   'languageOptions',
@@ -54,10 +56,11 @@ export async function defineConfig(
   ...userConfigs: Awaitable<UserConfigItem | UserConfigItem[]>[]
 ): Promise<UserConfigItem[]> {
   const {
+    astro: enableAstro = false,
     componentExts = [],
     gitignore: enableGitignore = true,
     ignores: userIgnores = [],
-    isInEditor = !!((process.env.VSCODE_PID || process.env.JETBRAINS_IDE || process.env.VIM) && !process.env.CI),
+    isInEditor = !!((process.env.VSCODE_PID || process.env.VSCODE_CWD || process.env.JETBRAINS_IDE || process.env.VIM) && !process.env.CI),
     react: enableReact = isPackageExists('react'),
     svelte: enableSvelte = isPackageExists('svelte'),
     typescript: enableTypeScript = isPackageExists('typescript'),
@@ -114,6 +117,7 @@ export async function defineConfig(
     configs.push(typescript({
       ...resolveSubOptions(options, 'typescript'),
       componentExts,
+      overrides: getOverrides(options, 'typescript'),
     }))
   }
 
@@ -136,6 +140,7 @@ export async function defineConfig(
   if (enableVue) {
     configs.push(vue({
       ...resolveSubOptions(options, 'vue'),
+      overrides: getOverrides(options, 'vue'),
       stylistic: stylisticOptions,
       typescript: !!enableTypeScript,
     }))
@@ -160,6 +165,13 @@ export async function defineConfig(
     configs.push(unocss({
       ...resolveSubOptions(options, 'unocss'),
       overrides: getOverrides(options, 'unocss'),
+    }))
+  }
+
+  if (enableAstro) {
+    configs.push(astro({
+      overrides: getOverrides(options, 'astro'),
+      stylistic: stylisticOptions,
     }))
   }
 

@@ -1,4 +1,5 @@
-import { GLOB_CSS, GLOB_LESS, GLOB_MARKDOWN, GLOB_POSTCSS, GLOB_SCSS } from '../globs'
+import { isPackageExists } from 'local-pkg'
+import { GLOB_ASTRO, GLOB_CSS, GLOB_LESS, GLOB_MARKDOWN, GLOB_POSTCSS, GLOB_SCSS } from '../globs'
 import type { VendoredPrettierOptions } from '../vender/prettier-types'
 import { ensurePackages, interopDefault, parserPlain } from '../utils'
 import type { FlatConfigItem, OptionsFormatters, StylisticConfig } from '../types'
@@ -8,18 +9,25 @@ export async function formatters(
   options: OptionsFormatters | true = {},
   stylistic: StylisticConfig = {},
 ): Promise<FlatConfigItem[]> {
-  await ensurePackages([
-    'eslint-plugin-format',
-  ])
-
   if (options === true) {
     options = {
+      astro: isPackageExists('astro'),
       css: true,
       graphql: true,
       html: true,
       markdown: true,
+      slidev: isPackageExists('@slidev/cli'),
     }
   }
+
+  await ensurePackages([
+    'eslint-plugin-format',
+    options.markdown && options.slidev ? 'prettier-plugin-slidev' : undefined,
+    options.astro ? 'prettier-plugin-astro' : undefined,
+  ])
+
+  if (options.slidev && options.markdown !== true && options.markdown !== 'prettier')
+    throw new Error('`slidev` option only works when `markdown` is enabled with `prettier`')
 
   const {
     indent,
@@ -139,8 +147,15 @@ export async function formatters(
       ? 'prettier'
       : options.markdown
 
+    const GLOB_SLIDEV = !options.slidev
+      ? []
+      : options.slidev === true
+        ? ['**/slides.md']
+        : options.slidev.files
+
     configs.push({
       files: [GLOB_MARKDOWN],
+      ignores: GLOB_SLIDEV,
       languageOptions: {
         parser: parserPlain,
       },
@@ -159,6 +174,52 @@ export async function formatters(
                 ...dprintOptions,
                 language: 'markdown',
               },
+        ],
+      },
+    })
+
+    if (options.slidev) {
+      configs.push({
+        files: GLOB_SLIDEV,
+        languageOptions: {
+          parser: parserPlain,
+        },
+        name: 'antfu:formatter:slidev',
+        rules: {
+          'format/prettier': [
+            'error',
+            {
+              printWidth: 120,
+              ...prettierOptions,
+              embeddedLanguageFormatting: 'off',
+              parser: 'slidev',
+              plugins: [
+                'prettier-plugin-slidev',
+              ],
+            },
+          ],
+        },
+      })
+    }
+  }
+
+  if (options.astro) {
+    configs.push({
+      files: [GLOB_ASTRO],
+      languageOptions: {
+        parser: parserPlain,
+      },
+      name: 'antfu:formatter:astro',
+      rules: {
+        'format/prettier': [
+          'error',
+          {
+            ...prettierOptions,
+            parser: 'astro',
+            plugins: [
+              'prettier-plugin-astro',
+            ],
+          },
         ],
       },
     })
