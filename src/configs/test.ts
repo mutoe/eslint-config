@@ -1,11 +1,14 @@
 import { ensurePackages, interopDefault } from '../utils'
-import type { FlatConfigItem, OptionsFiles, OptionsIsInEditor, OptionsOverrides, OptionsTestFrameworks } from '../types'
+import type { OptionsFiles, OptionsIsInEditor, OptionsOverrides, OptionsTestFrameworks, TypedFlatConfigItem } from '../types'
 import { GLOB_SRC_EXT, GLOB_TESTS } from '../globs'
 import { isPackageExists } from 'local-pkg'
 
+// Hold the reference so we don't redeclare the plugin on each call
+let _pluginTest: any
+
 export async function test(
   options: OptionsFiles & OptionsIsInEditor & OptionsOverrides & OptionsTestFrameworks = {},
-): Promise<FlatConfigItem[]> {
+): Promise<TypedFlatConfigItem[]> {
   const {
     cypress = isPackageExists('cypress'),
     files = GLOB_TESTS,
@@ -31,25 +34,27 @@ export async function test(
     cypress ? interopDefault(import('eslint-plugin-cypress')) : undefined,
   ] as const)
 
+  _pluginTest = _pluginTest || {
+    ...pluginVitest,
+    ...pluginCypress,
+    rules: {
+      ...pluginVitest && pluginVitest.rules,
+      // extend `test/no-only-tests` rule
+      ...pluginNoOnlyTests.rules,
+      ...pluginCypress && pluginCypress.configs.recommended.rules,
+    },
+  }
+
   return [
     {
-      name: 'antfu:test:setup',
+      name: 'antfu/test/setup',
       plugins: {
-        test: {
-          ...pluginVitest,
-          ...pluginCypress,
-          rules: {
-            ...pluginVitest && pluginVitest.rules,
-            // extend `test/no-only-tests` rule
-            ...pluginNoOnlyTests.rules,
-            ...pluginCypress && pluginCypress.configs.recommended.rules,
-          },
-        },
+        test: _pluginTest,
       },
     },
     {
       files,
-      name: 'antfu:test:rules',
+      name: 'antfu/test/rules',
       rules: {
         'node/prefer-global/process': 'off',
 

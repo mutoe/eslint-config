@@ -4,13 +4,16 @@ import defineConfig from './src'
 
 export default defineConfig(
   {
+    vue: true,
+    react: true,
+    typescript: true,
     formatters: true,
+  },
+  {
     ignores: [
       'fixtures',
       '_fixtures',
     ],
-    typescript: true,
-    vue: true,
   },
   {
     files: ['src/**/*.ts', 'eslint.config.js'],

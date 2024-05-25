@@ -1,11 +1,11 @@
 import { mergeProcessors } from 'eslint-merge-processors'
 import { changeLevel, ensurePackages, interopDefault } from '../utils'
-import type { FlatConfigItem, OptionsFiles, OptionsHasTypeScript, OptionsOverrides, OptionsStylistic, OptionsVue } from '../types'
+import type { OptionsFiles, OptionsHasTypeScript, OptionsOverrides, OptionsStylistic, OptionsVue, TypedFlatConfigItem } from '../types'
 import { GLOB_VUE } from '../globs'
 
 export async function vue(
   options: OptionsVue & OptionsHasTypeScript & OptionsOverrides & OptionsStylistic & OptionsFiles = {},
-): Promise<FlatConfigItem[]> {
+): Promise<TypedFlatConfigItem[]> {
   const {
     accessibility = false,
     files = [GLOB_VUE],
@@ -65,7 +65,7 @@ export async function vue(
           watchEffect: 'readonly',
         },
       },
-      name: 'antfu:vue:setup',
+      name: 'antfu/vue/setup',
       plugins: {
         vue: pluginVue,
         ...accessibility && {
@@ -88,7 +88,7 @@ export async function vue(
           sourceType: 'module',
         },
       },
-      name: 'antfu:vue:rules',
+      name: 'antfu/vue/rules',
       processor: sfcBlocks === false
         ? pluginVue.processors['.vue']
         : mergeProcessors([

@@ -1,9 +1,10 @@
+// eslint-disable-next-line unicorn/import-style
 import { join, resolve } from 'node:path'
 import { afterAll, beforeAll, it } from 'vitest'
 import fs from 'fs-extra'
 import { execa } from 'execa'
 import fg from 'fast-glob'
-import type { FlatConfigItem, OptionsConfig } from '../src/types'
+import type { OptionsConfig, TypedFlatConfigItem } from '../src/types'
 
 beforeAll(async () => {
   await fs.rm('_fixtures', { recursive: true, force: true })
@@ -137,7 +138,7 @@ runWithConfig(
   },
 )
 
-function runWithConfig(name: string, configs: OptionsConfig, ...items: FlatConfigItem[]) {
+function runWithConfig(name: string, configs: OptionsConfig, ...items: TypedFlatConfigItem[]) {
   it.concurrent(name, async ({ expect }) => {
     const from = resolve('fixtures/input')
     const output = resolve('fixtures/output', name)

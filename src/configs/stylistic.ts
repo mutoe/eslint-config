@@ -1,5 +1,5 @@
 import { interopDefault } from '../utils'
-import type { FlatConfigItem, OptionsOverrides, StylisticConfig } from '../types'
+import type { OptionsOverrides, StylisticConfig, TypedFlatConfigItem } from '../types'
 import { pluginAntfu } from '../plugins'
 
 export const StylisticConfigDefaults: StylisticConfig = {
@@ -9,12 +9,17 @@ export const StylisticConfigDefaults: StylisticConfig = {
   semi: false,
 }
 
+export interface StylisticOptions extends StylisticConfig, OptionsOverrides {
+  lessOpinionated?: boolean
+}
+
 export async function stylistic(
-  options: StylisticConfig & OptionsOverrides = {},
-): Promise<FlatConfigItem[]> {
+  options: StylisticOptions = {},
+): Promise<TypedFlatConfigItem[]> {
   const {
     indent,
     jsx,
+    lessOpinionated = false,
     overrides = {},
     quotes,
     semi,
@@ -36,7 +41,7 @@ export async function stylistic(
 
   return [
     {
-      name: 'antfu:stylistic',
+      name: 'antfu/stylistic/rules',
       plugins: {
         antfu: pluginAntfu,
         style: pluginStylistic,
@@ -45,10 +50,16 @@ export async function stylistic(
         ...config.rules,
 
         'antfu/consistent-list-newline': 'error',
-        'antfu/if-newline': 'error',
-        'antfu/top-level-function': 'error',
 
-        'curly': ['error', 'multi-or-nest', 'consistent'],
+        ...lessOpinionated
+          ? {
+              curly: ['error', 'all'],
+            }
+          : {
+              'antfu/if-newline': 'error',
+              'antfu/top-level-function': 'error',
+              'curly': ['error', 'multi-or-nest', 'consistent'],
+            },
 
         'style/arrow-parens': ['error', 'as-needed', { requireForBlockBody: false }],
         'style/jsx-one-expression-per-line': 'off',

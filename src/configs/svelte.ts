@@ -1,10 +1,10 @@
 import { ensurePackages, interopDefault } from '../utils'
-import type { FlatConfigItem, OptionsFiles, OptionsHasTypeScript, OptionsOverrides, OptionsStylistic } from '../types'
+import type { OptionsFiles, OptionsHasTypeScript, OptionsOverrides, OptionsStylistic, TypedFlatConfigItem } from '../types'
 import { GLOB_SVELTE } from '../globs'
 
 export async function svelte(
   options: OptionsHasTypeScript & OptionsOverrides & OptionsStylistic & OptionsFiles = {},
-): Promise<FlatConfigItem[]> {
+): Promise<TypedFlatConfigItem[]> {
   const {
     files = [GLOB_SVELTE],
     overrides = {},
@@ -30,7 +30,7 @@ export async function svelte(
 
   return [
     {
-      name: 'antfu:svelte:setup',
+      name: 'antfu/svelte/setup',
       plugins: {
         svelte: pluginSvelte,
       },
@@ -46,7 +46,7 @@ export async function svelte(
             : null,
         },
       },
-      name: 'antfu:svelte:rules',
+      name: 'antfu/svelte/rules',
       processor: pluginSvelte.processors['.svelte'],
       rules: {
         'import/no-mutable-exports': 'off',
@@ -56,7 +56,7 @@ export async function svelte(
           caughtErrors: 'none',
           ignoreRestSiblings: true,
           vars: 'all',
-          varsIgnorePattern: '^\\$\\$Props$',
+          varsIgnorePattern: String.raw`^(\$\$Props$|\$\$Events$|\$\$Slots$)`,
         }],
 
         'svelte/comment-directive': 'error',
@@ -83,7 +83,7 @@ export async function svelte(
 
         'unused-imports/no-unused-vars': [
           'error',
-          { args: 'after-used', argsIgnorePattern: '^_', vars: 'all', varsIgnorePattern: '^(_|\\$\\$Props$)' },
+          { args: 'after-used', argsIgnorePattern: '^_', vars: 'all', varsIgnorePattern: String.raw`^(_|\$\$Props$|\$\$Events$|\$\$Slots$)` },
         ],
 
         ...stylistic
