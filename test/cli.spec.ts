@@ -77,9 +77,9 @@ it('ignores files added in eslint.config.js', async () => {
   expect(stdout).toContain('Created eslint.config.mjs')
   expect(eslintConfigContent)
     .toMatchInlineSnapshot(`
-      "import antfu from '@antfu/eslint-config'
-  
-      export default antfu({
+      "import defineConfig from '@mutoe/eslint-config'
+
+      export default defineConfig({
         ignores: ["some-path","**/some-path/**","some-file","**/some-file/**"],
       })
       "

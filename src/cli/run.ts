@@ -4,7 +4,6 @@ import path from 'node:path'
 import process from 'node:process'
 import c from 'picocolors'
 import * as p from '@clack/prompts'
-
 import { extra, extraOptions, frameworkOptions, frameworks } from './constants'
 import { isGitClean } from './utils'
 import type { ExtraLibrariesOption, FrameworkOption, PromItem, PromtResult } from './types'

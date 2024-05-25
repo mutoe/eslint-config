@@ -4,7 +4,7 @@ import type { TypedFlatConfigItem } from '../types'
 export async function command(): Promise<TypedFlatConfigItem[]> {
   return [
     {
-      ...createCommand(),
+      ...createCommand() as TypedFlatConfigItem,
       name: 'antfu/command/rules',
     },
   ]

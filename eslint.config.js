@@ -1,13 +1,12 @@
-// @ts-expect-error missing types
+import defineConfig from '@mutoe/eslint-config'
 import styleMigrate from '@stylistic/eslint-plugin-migrate'
-import defineConfig from './src'
 
 export default defineConfig(
   {
-    vue: true,
+    formatters: true,
     react: true,
     typescript: true,
-    formatters: true,
+    vue: true,
   },
   {
     ignores: [
@@ -26,8 +25,8 @@ export default defineConfig(
     files: ['{src,test}/**/*.ts'],
     rules: {
       'import/order': 'off',
-      'style/linebreak-style': 'off',
       'style/arrow-parens': 'off',
+      'style/linebreak-style': 'off',
       'unicorn/catch-error-name': 'off',
       'unicorn/no-array-for-each': 'off',
       'unicorn/no-array-reduce': 'off',

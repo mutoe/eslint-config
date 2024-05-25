@@ -1,5 +1,6 @@
 import { interopDefault } from '../utils'
-import type { OptionsOverrides, StylisticConfig, TypedFlatConfigItem } from '../types'
+import type { OptionsOverrides, Rules, StylisticConfig, TypedFlatConfigItem } from '../types'
+
 import { pluginAntfu } from '../plugins'
 
 export const StylisticConfigDefaults: StylisticConfig = {
@@ -47,7 +48,7 @@ export async function stylistic(
         style: pluginStylistic,
       },
       rules: {
-        ...config.rules,
+        ...config.rules as Partial<Rules>,
 
         'antfu/consistent-list-newline': 'error',
 

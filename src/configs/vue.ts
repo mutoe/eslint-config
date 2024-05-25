@@ -39,7 +39,6 @@ export async function vue(
     interopDefault(import('eslint-plugin-vue')),
     interopDefault(import('vue-eslint-parser')),
     interopDefault(import('eslint-processor-vue-blocks')),
-    // @ts-expect-error missing types
     accessibility ? interopDefault(import('eslint-plugin-vuejs-accessibility')) : undefined,
   ] as const)
 
@@ -118,7 +117,7 @@ export async function vue(
               'ts/no-use-before-define': 'off',
             },
 
-        ...accessibility && changeLevel(pluginVueAccessibility.configs.recommended.rules, 'error', 'warn'),
+        ...accessibility && pluginVueAccessibility && changeLevel(pluginVueAccessibility.configs.recommended.rules || {}, 'error', 'warn'),
 
         'node/prefer-global/process': 'off',
         'vue/block-order': ['error', {

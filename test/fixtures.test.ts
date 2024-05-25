@@ -22,10 +22,7 @@ runWithConfig('js', {
 runWithConfig('all', {
   typescript: true,
   vue: true,
-  toml: true,
   react: true,
-  svelte: false,
-  astro: true,
   overrides: {
     react: {
       'react/no-unescaped-entities': 'off',
@@ -39,9 +36,7 @@ runWithConfig('no-style', {
   typescript: true,
   vue: true,
   react: true,
-  svelte: false,
   stylistic: false,
-  toml: true,
   overrides: {
     react: {
       'react/no-unescaped-entities': 'off',
@@ -57,12 +52,10 @@ runWithConfig(
     typescript: true,
     vue: true,
     react: true,
-    svelte: false,
     stylistic: {
       indent: 'tab',
       quotes: 'double',
     },
-    toml: true,
     overrides: {
       react: {
         'react/no-unescaped-entities': 'off',
@@ -86,7 +79,6 @@ runWithConfig(
     typescript: true,
     vue: true,
     react: true,
-    svelte: false,
     overrides: {
       react: {
         'react/no-unescaped-entities': 'off',
@@ -109,10 +101,7 @@ runWithConfig(
     typescript: true,
     vue: true,
     react: true,
-    svelte: false,
-    astro: true,
     formatters: true,
-    toml: true,
     overrides: {
       react: {
         'react/no-unescaped-entities': 'off',
@@ -130,7 +119,6 @@ runWithConfig(
     jsx: false,
     vue: false,
     react: false,
-    svelte: false,
     markdown: false,
     formatters: {
       markdown: true,
