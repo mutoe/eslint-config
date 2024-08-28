@@ -1,6 +1,6 @@
 export function HelloWorld({
 	greeting = "hello",
-	greeted = "\"World\"",
+	greeted = '"World"',
 	silent = false,
 	onMouseOver,
 }) {
@@ -21,7 +21,7 @@ export function HelloWorld({
 			<em>
 				{ greeted }
 			</em>
-			{ (silent) ? "." : "!"}
+			{ silent ? "." : "!"}
 		</div>
 	)
 }

@@ -21,7 +21,7 @@ export function HelloWorld({
       <em>
         { greeted }
       </em>
-      { (silent) ? '.' : '!'}
+      { silent ? '.' : '!'}
     </div>
   )
 }
