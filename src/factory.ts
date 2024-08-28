@@ -77,7 +77,7 @@ export const defaultPluginRenaming = {
  * @returns {Promise<TypedFlatConfigItem[]>}
  *  The merged ESLint configurations.
  */
-export function antfu(
+export function defineConfig(
   options: OptionsConfig & TypedFlatConfigItem = {},
   ...userConfigs: Awaitable<TypedFlatConfigItem | TypedFlatConfigItem[] | FlatConfigComposer<any, any> | Linter.Config[]>[]
 ): FlatConfigComposer<TypedFlatConfigItem, ConfigNames> {
@@ -101,7 +101,7 @@ export function antfu(
     isInEditor = isInEditorEnv()
     if (isInEditor)
       // eslint-disable-next-line no-console
-      console.log('[@antfu/eslint-config] Detected running in editor, some rules are disabled.')
+      console.log('[@mutoe/eslint-config] Detected running in editor, some rules are disabled.')
   }
 
   const stylisticOptions = options.stylistic === false
