@@ -6,15 +6,15 @@ import type {
   OptionsVue,
   TypedFlatConfigItem,
 } from '../types'
-
 import { mergeProcessors } from 'eslint-merge-processors'
 import { GLOB_VUE } from '../globs'
-import { interopDefault } from '../utils'
+import { changeLevel, interopDefault } from '../utils'
 
 export async function vue(
   options: OptionsVue & OptionsHasTypeScript & OptionsOverrides & OptionsStylistic & OptionsFiles = {},
 ): Promise<TypedFlatConfigItem[]> {
   const {
+    accessibility = true,
     files = [GLOB_VUE],
     overrides = {},
     stylistic = true,
@@ -33,11 +33,16 @@ export async function vue(
     pluginVue,
     parserVue,
     processorVueBlocks,
+    pluginVueAccessibility,
   ] = await Promise.all([
     interopDefault(import('eslint-plugin-vue')),
     interopDefault(import('vue-eslint-parser')),
     interopDefault(import('eslint-processor-vue-blocks')),
+    interopDefault(import('eslint-plugin-vuejs-accessibility')),
   ] as const)
+
+  const labelComponents = typeof accessibility === 'boolean' ? [] : accessibility.labelComponents ?? []
+  const controlComponents = typeof accessibility === 'boolean' ? [] : accessibility.controlComponents ?? []
 
   return [
     {
@@ -63,7 +68,8 @@ export async function vue(
       },
       name: 'antfu/vue/setup',
       plugins: {
-        vue: pluginVue,
+        'vue': pluginVue,
+        'vuejs-accessibility': pluginVueAccessibility,
       },
     },
     {
@@ -108,6 +114,49 @@ export async function vue(
               ...pluginVue.configs['flat/strongly-recommended'].map(c => c.rules).reduce((acc, c) => ({ ...acc, ...c }), {}) as any,
               ...pluginVue.configs['flat/recommended'].map(c => c.rules).reduce((acc, c) => ({ ...acc, ...c }), {}) as any,
             },
+
+        ...accessibility
+          ? {
+              ...changeLevel(pluginVueAccessibility.configs.recommended.rules, 'error', 'warn'),
+              'vuejs-accessibility/form-control-has-label': ['warn', {
+                controlComponents,
+                labelComponents,
+              }],
+              'vuejs-accessibility/label-has-for': ['warn', {
+                components: labelComponents,
+                // @keep-sorted
+                controlComponents: [
+                  'AutoComplete',
+                  'Button',
+                  'CascadeSelect',
+                  'Checkbox',
+                  'ColorPicker',
+                  'Datepicker',
+                  'Editor',
+                  'Input',
+                  'InputMask',
+                  'InputNumber',
+                  'InputOtp',
+                  'InputText',
+                  'MultiSelect',
+                  'Password',
+                  'RadioButton',
+                  'Rating',
+                  'Select',
+                  'SelectButton',
+                  'Slider',
+                  'SpeedDial',
+                  'SplitButton',
+                  'Textarea',
+                  'ToggleButton',
+                  'ToggleSwitch',
+                  'TreeSelect',
+                  ...controlComponents,
+                ],
+                required: { some: ['nesting', 'id'] },
+              }],
+            }
+          : {},
 
         'antfu/no-top-level-await': 'off',
         'node/prefer-global/process': 'off',
