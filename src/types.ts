@@ -290,7 +290,7 @@ export interface OptionsConfig extends OptionsComponentExts, OptionsProjectType 
    *
    * @default true
    */
-  test?: boolean | OptionsOverrides
+  test?: boolean | { cypress?: boolean } | OptionsOverrides
 
   /**
    * Enable Vue support.

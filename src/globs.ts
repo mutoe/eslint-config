@@ -32,12 +32,18 @@ export const GLOB_GRAPHQL = '**/*.{g,graph}ql'
 
 export const GLOB_MARKDOWN_CODE = `${GLOB_MARKDOWN}/${GLOB_SRC}`
 
+export const GLOB_CYPRESS = [
+  `**/*.cy.${GLOB_SRC_EXT}`,
+  `**/cypress/**/*.${GLOB_SRC_EXT}`,
+]
+
 export const GLOB_TESTS = [
   `**/__tests__/**/*.${GLOB_SRC_EXT}`,
   `**/*.spec.${GLOB_SRC_EXT}`,
   `**/*.test.${GLOB_SRC_EXT}`,
   `**/*.bench.${GLOB_SRC_EXT}`,
   `**/*.benchmark.${GLOB_SRC_EXT}`,
+  ...GLOB_CYPRESS,
 ]
 
 export const GLOB_ALL_SRC = [
