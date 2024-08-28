@@ -11,8 +11,18 @@ Based on the version of @Antfu, the following sections have been modified:
 
 - Update default package name to `defineConfig`
 - Supplement more `package.json` properties ordering rules
-- (Plan) Reduce the number of default dependencies
-- (Plan) Some of my favorite styles
+- More unicorn rules (very crazy 😈)
+- More sensible `import/order` rules
+- Only allow camelcase in variable names
+- JavaScript: allow named function as callback (for error stack trace readability)
+- TypeScript: consistent type assertions (use `xxx as T` instead of `<T>xxx`)
+- Vue: block order change to ['template', 'script', 'style']
+- Vue: don't allow attribute more than 3 in one line
+- Vue: Allow singleline html element
+- JSX: allow multiple element in one line
+- Style: set linebreak-style to `unix`
+- Style: no extra parens
+- Style: avoid escape quotes in statement
 
 ---
 

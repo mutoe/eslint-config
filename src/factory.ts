@@ -13,6 +13,7 @@ import {
   jsonc,
   jsx,
   markdown,
+  mutoe,
   node,
   perfectionist,
   react,
@@ -87,6 +88,7 @@ export function defineConfig(
     componentExts = [],
     gitignore: enableGitignore = true,
     jsx: enableJsx = true,
+    mutoe: enableMutoe = true,
     react: enableReact = false,
     regexp: enableRegexp = true,
     solid: enableSolid = false,
@@ -272,6 +274,19 @@ export function defineConfig(
       options.formatters,
       typeof stylisticOptions === 'boolean' ? {} : stylisticOptions,
     ))
+  }
+
+  if (enableMutoe) {
+    configs.push(mutoe({
+      stylistic: stylisticOptions,
+      typescript: !!enableTypeScript,
+      vue: !!enableVue,
+      ...typescriptOptions,
+      overrides: {
+        ...getOverrides(options, 'stylistic'),
+        ...getOverrides(options, 'typescript'),
+      },
+    }))
   }
 
   // User can optionally pass a flat config item to the first argument
