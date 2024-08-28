@@ -44,6 +44,31 @@ export interface OptionsVue extends OptionsOverrides {
    * @default 3
    */
   vueVersion?: 2 | 3
+
+  /**
+   * Enable accessibility support.
+   *
+   * @see https://vue-a11y.github.io/eslint-plugin-vuejs-accessibility/
+   * @default true
+   */
+  accessibility?: boolean | {
+    /**
+     * For the `labelComponents` option, these strings determine which elements (always including <label>) should be checked for having the for prop.
+     *
+     * This is a good use case when you have a wrapper component that simply renders a label element.
+     *
+     * @see https://vue-a11y.github.io/eslint-plugin-vuejs-accessibility/rules/label-has-for.html
+     */
+    labelComponents?: string[]
+    /**
+     * For the `controlComponents` option, these strings determine which elements should be counted as form control elements.
+     *
+     * By default, this includes input, meter, progress, select, and textarea. This is a good use case when you have a wrapper component that simplify renders a input element.
+     *
+     * @see https://vue-a11y.github.io/eslint-plugin-vuejs-accessibility/rules/label-has-for.html
+     */
+    controlComponents?: string[]
+  }
 }
 
 export type OptionsTypescript =
