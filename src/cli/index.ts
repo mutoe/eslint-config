@@ -9,11 +9,11 @@ import { pkgJson } from './constants'
 function header(): void {
   // eslint-disable-next-line no-console
   console.log('\n')
-  p.intro(`${c.green(`@antfu/eslint-config `)}${c.dim(`v${pkgJson.version}`)}`)
+  p.intro(`${c.green(`@mutoe/eslint-config `)}${c.dim(`v${pkgJson.version}`)}`)
 }
 
 const instance = yargs(hideBin(process.argv))
-  .scriptName('@antfu/eslint-config')
+  .scriptName('@mutoe/eslint-config')
   .usage('')
   .command(
     '*',
