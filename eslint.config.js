@@ -1,6 +1,6 @@
-import styleMigrate from '@stylistic/eslint-plugin-migrate'
+ import styleMigrate from '@stylistic/eslint-plugin-migrate'
 
-import { antfu } from './src'
+import { antfu } from '@antfu/eslint-config'
 
 export default antfu(
   {
