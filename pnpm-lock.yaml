@@ -171,6 +171,9 @@ importers:
       eslint-plugin-astro:
         specifier: ^1.2.3
         version: 1.2.3(eslint@9.9.1(jiti@1.21.6))(typescript@5.5.4)
+      eslint-plugin-cypress:
+        specifier: ^3.5.0
+        version: 3.5.0(eslint@9.9.1(jiti@1.21.6))
       eslint-plugin-format:
         specifier: ^0.1.2
         version: 0.1.2(eslint@9.9.1(jiti@1.21.6))
@@ -1710,6 +1713,11 @@ packages:
 
   eslint-plugin-command@0.2.3:
     resolution: {integrity: sha512-1bBYNfjZg60N2ZpLV5ATYSYyueIJ+zl5yKrTs0UFDdnyu07dNSZ7Xplnc+Wb6SXTdc1sIaoIrnuyhvztcltX6A==}
+    peerDependencies:
+      eslint: ^9.9.1
+
+  eslint-plugin-cypress@3.5.0:
+    resolution: {integrity: sha512-JZQ6XnBTNI8h1B9M7wJSFzc48SYbh7VMMKaNTQOFa3BQlnmXPrVc4PKen8R+fpv6VleiPeej6VxloGb42zdRvw==}
     peerDependencies:
       eslint: ^9.9.1
 
@@ -4918,6 +4926,11 @@ snapshots:
     dependencies:
       '@es-joy/jsdoccomment': 0.43.1
       eslint: 9.9.1(jiti@1.21.6)
+
+  eslint-plugin-cypress@3.5.0(eslint@9.9.1(jiti@1.21.6)):
+    dependencies:
+      eslint: 9.9.1(jiti@1.21.6)
+      globals: 13.24.0
 
   eslint-plugin-es-x@7.5.0(eslint@9.9.1(jiti@1.21.6)):
     dependencies:
