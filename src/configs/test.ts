@@ -1,27 +1,36 @@
-import { GLOB_TESTS } from '../globs'
-import { interopDefault } from '../utils'
-
+import { isPackageExists } from 'local-pkg'
+import { GLOB_CYPRESS, GLOB_TESTS } from '../globs'
+import { ensurePackages, interopDefault } from '../utils'
 import type { OptionsFiles, OptionsIsInEditor, OptionsOverrides, TypedFlatConfigItem } from '../types'
 
 // Hold the reference so we don't redeclare the plugin on each call
 let _pluginTest: any
 
 export async function test(
-  options: OptionsFiles & OptionsIsInEditor & OptionsOverrides = {},
+  options: OptionsFiles & OptionsIsInEditor & OptionsOverrides & { cypress?: boolean } = {},
 ): Promise<TypedFlatConfigItem[]> {
   const {
+    cypress,
     files = GLOB_TESTS,
     isInEditor = false,
     overrides = {},
   } = options
 
+  const enableCypress = cypress || isPackageExists('cypress')
+  if (enableCypress) {
+    await ensurePackages(['eslint-plugin-cypress'])
+  }
+
   const [
     pluginVitest,
     pluginNoOnlyTests,
+    pluginCypress,
   ] = await Promise.all([
     interopDefault(import('@vitest/eslint-plugin')),
     // @ts-expect-error missing types
     interopDefault(import('eslint-plugin-no-only-tests')),
+    // @ts-expect-error missing types
+    enableCypress ? interopDefault(import('eslint-plugin-cypress/flat')) : null,
   ] as const)
 
   _pluginTest = _pluginTest || {
@@ -58,5 +67,12 @@ export async function test(
         ...overrides,
       },
     },
+    ...(pluginCypress
+      ? [{
+          files: GLOB_CYPRESS,
+          ...pluginCypress.configs.recommended,
+          name: 'mutoe/test/cypress-rules',
+        }]
+      : []),
   ]
 }
