@@ -1,6 +1,22 @@
-# @antfu/eslint-config
+# @mutoe/eslint-config
 
-[![npm](https://img.shields.io/npm/v/@antfu/eslint-config?color=444&label=)](https://npmjs.com/package/@antfu/eslint-config) [![code style](https://antfu.me/badge-code-style.svg)](https://github.com/antfu/eslint-config)
+> Forked from [antfu/eslint-config](https://github.com/antfu/eslint-config)
+
+[![npm](https://img.shields.io/npm/v/@mutoe/eslint-config?color=444&label=mutoe/eslint-config)](https://npmjs.com/package/@mutoe/eslint-config)
+[![npm](https://img.shields.io/npm/v/@antfu/eslint-config?color=444&label=Upstream)](https://npmjs.com/package/@antfu/eslint-config)
+
+[![code style](https://antfu.me/badge-code-style.svg)](https://github.com/antfu/eslint-config)
+
+Based on the version of @Antfu, the following sections have been modified:
+
+- Update default package name to `defineConfig`
+- Supplement more `package.json` properties ordering rules
+- (Plan) Reduce the number of default dependencies
+- (Plan) Some of my favorite styles
+
+---
+
+Following is what the Antfu version supports:
 
 - Auto fix for formatting (aimed to be used standalone **without** Prettier)
 - Reasonable defaults, best practices, only one line of config
