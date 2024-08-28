@@ -407,6 +407,8 @@ export interface OptionsConfig extends OptionsComponentExts, OptionsProjectType 
    */
   autoRenamePlugins?: boolean
 
+  mutoe?: boolean
+
   /**
    * Provide overrides for rules for each integration.
    *
