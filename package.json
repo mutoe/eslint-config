@@ -1,13 +1,15 @@
 {
-  "name": "@antfu/eslint-config",
+  "name": "@mutoe/eslint-config",
   "type": "module",
   "version": "4.8.1",
   "packageManager": "pnpm@10.6.1",
-  "description": "Anthony's ESLint config",
-  "author": "Anthony Fu <anthonyfu117@hotmail.com> (https://github.com/antfu/)",
+  "description": "Mutoe's ESLint config (forked from antfu/eslint-config)",
+  "author": "mutoe <imutoe@gmail.com> (https://github.com/mutoe/)",
+  "contributors": [
+    "Anthony Fu <anthonyfu117@hotmail.com> (https://github.com/antfu/)"
+  ],
   "license": "MIT",
-  "funding": "https://github.com/sponsors/antfu",
-  "homepage": "https://github.com/antfu/eslint-config",
+  "homepage": "https://github.com/mutoe/eslint-config",
   "keywords": [
     "eslint-config"
   ],
@@ -24,7 +26,7 @@
   "scripts": {
     "build": "nr typegen && tsup --clean --dts",
     "stub": "tsup",
-    "dev": "npx @eslint/config-inspector --config eslint.config.ts",
+    "dev": "npx @eslint/config-inspector --config eslint.config.js",
     "build:inspector": "pnpm build && npx @eslint/config-inspector build",
     "watch": "tsup --watch",
     "lint": "eslint",
@@ -131,7 +133,7 @@
     "yaml-eslint-parser": "catalog:"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "workspace:*",
+    "@antfu/eslint-config": "4.8.1",
     "@antfu/ni": "catalog:",
     "@eslint-react/eslint-plugin": "catalog:",
     "@eslint/config-inspector": "catalog:",
