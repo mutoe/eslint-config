@@ -15,9 +15,9 @@ export function getEslintConfigContent(
   additionalConfigs?: string[],
 ): string {
   return `
-import antfu from '@antfu/eslint-config'
+import defineConfig from '@mutoe/eslint-config'
 
-export default antfu({
+export default defineConfig({
 ${mainConfig}
 }${additionalConfigs?.map(config => `,{\n${config}\n}`)})
 `.trimStart()
