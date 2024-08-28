@@ -1,7 +1,6 @@
-// @ts-expect-error missing types
-import styleMigrate from '@stylistic/eslint-plugin-migrate'
+import { antfu } from '@antfu/eslint-config'
 
-import { antfu } from './src'
+import styleMigrate from '@stylistic/eslint-plugin-migrate'
 
 export default antfu(
   {

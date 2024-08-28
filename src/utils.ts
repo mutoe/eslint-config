@@ -6,7 +6,7 @@ import { isPackageExists } from 'local-pkg'
 import type { Awaitable, TypedFlatConfigItem } from './types'
 
 const scopeUrl = fileURLToPath(new URL('.', import.meta.url))
-const isCwdInScope = isPackageExists('@antfu/eslint-config')
+const isCwdInScope = isPackageExists('@mutoe/eslint-config')
 
 export const parserPlain = {
   meta: {
@@ -43,7 +43,7 @@ export async function combine(...configs: Awaitable<TypedFlatConfigItem | TypedF
  *
  * @example
  * ```ts
- * import { renameRules } from '@antfu/eslint-config'
+ * import { renameRules } from '@mutoe/eslint-config'
  *
  * export default [{
  *   rules: renameRules(
@@ -76,7 +76,7 @@ export function renameRules(
  *
  * @example
  * ```ts
- * import { renamePluginInConfigs } from '@antfu/eslint-config'
+ * import { renamePluginInConfigs } from '@mutoe/eslint-config'
  * import someConfigs from './some-configs'
  *
  * export default renamePluginInConfigs(someConfigs, {
