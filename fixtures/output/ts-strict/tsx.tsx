@@ -10,8 +10,7 @@ export function jsx2() {
         {...props}
         a={1}
         b="2"
-      >
-        Inline Text
+      >Inline Text
       </div>
       <Component1>
         Block Text
@@ -19,13 +18,10 @@ export function jsx2() {
       <div>
         Mixed
         <div>Foo</div>
-        Text
-        <b> Bar</b>
+        Text<b> Bar</b>
       </div>
       <p>
-        foo
-        <i>bar</i>
-        <b>baz</b>
+        foo<i>bar</i><b>baz</b>
       </p>
     </a>
   )

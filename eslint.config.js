@@ -1,6 +1,5 @@
- import styleMigrate from '@stylistic/eslint-plugin-migrate'
-
 import { antfu } from '@antfu/eslint-config'
+import styleMigrate from '@stylistic/eslint-plugin-migrate'
 
 export default antfu(
   {
@@ -13,6 +12,9 @@ export default antfu(
     formatters: true,
     pnpm: true,
     type: 'lib',
+    rules: {
+      'pnpm/enforce-catalog': 'off',
+    },
   },
   {
     ignores: [

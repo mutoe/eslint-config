@@ -453,6 +453,11 @@ export interface OptionsConfig extends OptionsComponentExts, OptionsProjectType 
   autoRenamePlugins?: boolean
 
   /**
+   * Mutoe's preferred rules
+   */
+  mutoe?: boolean
+
+  /**
    * Provide overrides for rules for each integration.
    *
    * @deprecated use `overrides` option in each integration key instead

@@ -99,6 +99,7 @@
     "@clack/prompts": "catalog:",
     "@eslint-community/eslint-plugin-eslint-comments": "catalog:",
     "@eslint/markdown": "catalog:",
+    "@mutoe/eslint-plugin-perfectionist-vue": "^1.0.0",
     "@stylistic/eslint-plugin": "catalog:",
     "@typescript-eslint/eslint-plugin": "catalog:",
     "@typescript-eslint/parser": "catalog:",
