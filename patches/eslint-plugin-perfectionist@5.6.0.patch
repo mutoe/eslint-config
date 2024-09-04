@@ -1,0 +1,25 @@
+diff --git a/dist/utils/get-eslint-disabled-lines.js b/dist/utils/get-eslint-disabled-lines.js
+index 5e3721fb9db94183af89caf55fd1063a9fb5ff66..c1b838d9e168bbfc06b97280ccce53c6972a4bff 100644
+--- a/dist/utils/get-eslint-disabled-lines.js
++++ b/dist/utils/get-eslint-disabled-lines.js
+@@ -1,10 +1,19 @@
+ import { getEslintDisabledRules } from './get-eslint-disabled-rules.js'
+ import { UnreachableCaseError } from './unreachable-case-error.js'
++function getSourceCodeComments(sourceCode) {
++  if (sourceCode.ast?.comments && Array.isArray(sourceCode.ast.comments))
++    return sourceCode.ast.comments
++  if (typeof sourceCode.getAllComments === 'function') {
++    const result = sourceCode.getAllComments()
++    return result != null && typeof result[Symbol.iterator] === 'function' ? result : []
++  }
++  return []
++}
+ function getEslintDisabledLines(props) {
+   let { sourceCode, ruleName } = props
+   let returnValue = []
+   let lineRulePermanentlyDisabled = null
+-  for (let comment of sourceCode.getAllComments()) {
++  for (let comment of getSourceCodeComments(sourceCode)) {
+     let eslintDisabledRules = getEslintDisabledRules(comment.value)
+     if (!eslintDisabledRules) {
+       continue

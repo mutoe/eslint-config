@@ -50,7 +50,7 @@ export async function test(
         'test/no-only-tests': isInEditor ? 'warn' : 'error',
 
         'test/prefer-hooks-in-order': 'error',
-        'test/prefer-lowercase-title': 'error',
+        'test/prefer-lowercase-title': 'off',
 
         // Disables
         ...{

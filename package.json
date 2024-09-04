@@ -128,6 +128,7 @@
     "@e18e/eslint-plugin": "catalog:prod",
     "@eslint-community/eslint-plugin-eslint-comments": "catalog:prod",
     "@eslint/markdown": "catalog:prod",
+    "@mutoe/eslint-plugin-perfectionist-vue": "catalog:",
     "@stylistic/eslint-plugin": "catalog:prod",
     "@typescript-eslint/eslint-plugin": "catalog:prod",
     "@typescript-eslint/parser": "catalog:prod",

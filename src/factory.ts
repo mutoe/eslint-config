@@ -18,6 +18,7 @@ import {
   jsonc,
   jsx,
   markdown,
+  mutoe,
   nextjs,
   node,
   perfectionist,
@@ -100,6 +101,7 @@ export function defineConfig(
     imports: enableImports = true,
     jsdoc: enableJsdoc = true,
     jsx: enableJsx = true,
+    mutoe: enableMutoe = true,
     nextjs: enableNextjs = false,
     node: enableNode = true,
     pnpm: enableCatalogs = !!findUpSync('pnpm-workspace.yaml'),
@@ -203,7 +205,7 @@ export function defineConfig(
 
   if (enableUnicorn) {
     configs.push(
-      unicorn(enableUnicorn === true ? {} : enableUnicorn),
+      unicorn(enableUnicorn === true ? { allRecommended: true } : enableUnicorn),
     )
   }
 
@@ -392,6 +394,20 @@ export function defineConfig(
 
   if ('files' in options) {
     throw new Error('[@mutoe/eslint-config] The first argument should not contain the "files" property as the options are supposed to be global. Place it in the second or later config instead.')
+  }
+
+  if (enableMutoe) {
+    configs.push(mutoe({
+      componentExts,
+      react: !!enableReact,
+      stylistic: stylisticOptions,
+      test: !!options.test,
+      typescript: !!enableTypeScript,
+      unicorn: !!enableUnicorn,
+      unocss: !!options.unocss,
+      vue: !!enableVue,
+      ...typescriptOptions,
+    }))
   }
 
   // User can optionally pass a flat config item to the first argument

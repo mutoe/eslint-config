@@ -24,9 +24,9 @@ const people = [
 ]
 
 // Use the forEach method to iterate over the array
-people.forEach((person) => {
+for (const person of people) {
   person.sayHello()
-})
+}
 
 // Use a template literal to create a multiline string
 const multilineString = `

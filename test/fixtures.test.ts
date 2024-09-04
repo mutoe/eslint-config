@@ -26,29 +26,34 @@ runWithConfig('all', {
   vue: true,
   svelte: true,
   astro: true,
+}, {
+  rules: {
+    'vue/no-ref-object-reactivity-loss': 'off',
+  },
 })
 runWithConfig('no-style', {
   typescript: true,
   vue: true,
   stylistic: false,
+}, {
+  rules: {
+    'vue/no-ref-object-reactivity-loss': 'off',
+  },
 })
-runWithConfig(
-  'tab-double-quotes',
-  {
-    typescript: true,
-    vue: true,
-    toml: true,
-    stylistic: {
-      indent: 'tab',
-      quotes: 'double',
-    },
+runWithConfig('tab-double-quotes', {
+  typescript: true,
+  vue: true,
+  toml: true,
+  stylistic: {
+    indent: 'tab',
+    quotes: 'double',
   },
-  {
-    rules: {
-      'style/no-mixed-spaces-and-tabs': 'off',
-    },
+}, {
+  rules: {
+    'style/no-mixed-spaces-and-tabs': 'off',
+    'vue/no-ref-object-reactivity-loss': 'off',
   },
-)
+})
 
 // https://github.com/antfu/eslint-config/issues/255
 runWithConfig(
@@ -59,6 +64,7 @@ runWithConfig(
   {
     rules: {
       'ts/consistent-type-definitions': ['error', 'type'],
+      'vue/no-ref-object-reactivity-loss': 'off',
     },
   },
 )
@@ -74,6 +80,7 @@ runWithConfig(
   {
     rules: {
       'ts/no-unsafe-return': ['off'],
+      'vue/no-ref-object-reactivity-loss': 'off',
     },
   },
 )
@@ -90,31 +97,34 @@ runWithConfig(
   {
     rules: {
       'ts/no-unsafe-return': ['off'],
+      'vue/no-ref-object-reactivity-loss': 'off',
     },
   },
 )
 
-runWithConfig(
-  'with-formatters',
-  {
-    typescript: true,
-    vue: true,
-    astro: true,
-    formatters: true,
+runWithConfig('with-formatters', {
+  typescript: true,
+  vue: true,
+  astro: true,
+  formatters: true,
+}, {
+  rules: {
+    'vue/no-ref-object-reactivity-loss': 'off',
   },
-)
+})
 
-runWithConfig(
-  'no-markdown-with-formatters',
-  {
-    jsx: false,
-    vue: false,
-    markdown: false,
-    formatters: {
-      markdown: true,
-    },
+runWithConfig('no-markdown-with-formatters', {
+  jsx: false,
+  vue: false,
+  markdown: false,
+  formatters: {
+    markdown: true,
   },
-)
+}, {
+  rules: {
+    'vue/no-ref-object-reactivity-loss': 'off',
+  },
+})
 
 function runWithConfig(name: string, configs: OptionsConfig, ...items: TypedFlatConfigItem[]) {
   it.concurrent(name, async ({ expect }) => {

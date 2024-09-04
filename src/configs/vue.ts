@@ -9,18 +9,21 @@ import type {
 
 import { mergeProcessors } from 'eslint-merge-processors'
 import { GLOB_VUE } from '../globs'
-import { ensurePackages, interopDefault } from '../utils'
+import { changeLevel, ensurePackages, interopDefault } from '../utils'
 
 export async function vue(
   options: OptionsVue & OptionsHasTypeScript & OptionsOverrides & OptionsStylistic & OptionsFiles = {},
 ): Promise<TypedFlatConfigItem[]> {
   const {
-    a11y = false,
+    a11y = true,
     files = [GLOB_VUE],
     overrides = {},
     stylistic = true,
     vueVersion = 3,
   } = options
+
+  const labelComponents = typeof a11y === 'boolean' ? [] : a11y.labelComponents ?? []
+  const controlComponents = typeof a11y === 'boolean' ? [] : a11y.controlComponents ?? []
 
   const sfcBlocks = options.sfcBlocks === true
     ? {}
@@ -132,7 +135,8 @@ export async function vue(
         'vue/component-tags-order': 'off',
         'vue/custom-event-name-casing': ['error', 'camelCase'],
         'vue/define-macros-order': ['error', {
-          order: ['defineOptions', 'defineProps', 'defineEmits', 'defineSlots'],
+          defineExposeLast: true,
+          order: ['defineOptions', 'defineModel', 'defineProps', 'defineEmits', 'defineSlots'],
         }],
         'vue/dot-location': ['error', 'property'],
         'vue/dot-notation': ['error', { allowKeywords: true }],
@@ -203,18 +207,53 @@ export async function vue(
           : {},
 
         ...a11y
-          ? {
+          ? changeLevel({
               'vue-a11y/alt-text': 'error',
               'vue-a11y/anchor-has-content': 'error',
               'vue-a11y/aria-props': 'error',
               'vue-a11y/aria-role': 'error',
               'vue-a11y/aria-unsupported-elements': 'error',
               'vue-a11y/click-events-have-key-events': 'error',
-              'vue-a11y/form-control-has-label': 'error',
+              'vue-a11y/form-control-has-label': ['error', {
+                controlComponents,
+                labelComponents,
+              }],
               'vue-a11y/heading-has-content': 'error',
               'vue-a11y/iframe-has-title': 'error',
               'vue-a11y/interactive-supports-focus': 'error',
-              'vue-a11y/label-has-for': 'error',
+              'vue-a11y/label-has-for': ['error', {
+                components: labelComponents,
+                // @keep-sorted
+                controlComponents: [
+                  'AutoComplete',
+                  'Button',
+                  'CascadeSelect',
+                  'Checkbox',
+                  'ColorPicker',
+                  'Datepicker',
+                  'Editor',
+                  'Input',
+                  'InputMask',
+                  'InputNumber',
+                  'InputOtp',
+                  'InputText',
+                  'MultiSelect',
+                  'Password',
+                  'RadioButton',
+                  'Rating',
+                  'Select',
+                  'SelectButton',
+                  'Slider',
+                  'SpeedDial',
+                  'SplitButton',
+                  'Textarea',
+                  'ToggleButton',
+                  'ToggleSwitch',
+                  'TreeSelect',
+                  ...controlComponents,
+                ],
+                required: { some: ['nesting', 'id'] },
+              }],
               'vue-a11y/media-has-caption': 'warn',
               'vue-a11y/mouse-events-have-key-events': 'error',
               'vue-a11y/no-access-key': 'error',
@@ -226,7 +265,7 @@ export async function vue(
               'vue-a11y/no-static-element-interactions': 'error',
               'vue-a11y/role-has-required-aria-props': 'error',
               'vue-a11y/tabindex-no-positive': 'warn',
-            }
+            }, 'error', 'warn')
           : {},
 
         ...overrides,

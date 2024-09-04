@@ -157,7 +157,7 @@
       "e18e",
     ],
     "rules": [
-      "e18e/prefer-array-at",
+      "- e18e/prefer-array-at",
       "e18e/prefer-array-fill",
       "e18e/prefer-includes",
       "- e18e/prefer-array-to-reversed",
@@ -167,7 +167,7 @@
       "e18e/prefer-object-has-own",
       "- e18e/prefer-spread-syntax",
       "e18e/prefer-url-canparse",
-      "e18e/prefer-array-from-map",
+      "- e18e/prefer-array-from-map",
       "e18e/prefer-timer-args",
       "e18e/prefer-date-now",
       "e18e/prefer-regex-test",
@@ -239,6 +239,62 @@
       "- antfu/no-top-level-await",
       "- no-console",
       "- ts/explicit-function-return-type",
+    ],
+  },
+  {
+    "files": [
+      "**/package.json",
+    ],
+    "name": "mutoe/sort/package-json",
+    "rules": [
+      "jsonc/array-bracket-newline",
+      "jsonc/array-element-newline",
+      "jsonc/object-curly-newline",
+      "jsonc/object-property-newline",
+      "jsonc/sort-array-values",
+      "jsonc/sort-keys",
+    ],
+  },
+  {
+    "ignores": [
+      "**/*.{md,json,yml,yaml}",
+      "**/*.md/**",
+      "**/eslint.config.*",
+      "**/pnpm-workspace.yaml",
+    ],
+    "name": "mutoe/perfectionist",
+    "rules": [
+      "perfectionist/sort-exports",
+      "perfectionist/sort-imports",
+      "perfectionist/sort-named-exports",
+      "perfectionist/sort-named-imports",
+    ],
+  },
+  {
+    "name": "mutoe/javascript",
+    "rules": [
+      "camelcase",
+      "no-cond-assign",
+      "prefer-arrow-callback",
+    ],
+  },
+  {
+    "files": [
+      "**/generated/**",
+    ],
+    "name": "mutoe/generated-rules",
+    "rules": [
+      "- ts/ban-ts-comment",
+      "- ts/no-unnecessary-type-constraint",
+      "- ts/no-unsafe-argument",
+      "- ts/no-unsafe-assignment",
+      "- ts/no-unsafe-call",
+      "- ts/no-unsafe-member-access",
+      "- ts/no-unsafe-return",
+      "- unicorn/no-array-reduce",
+      "- unicorn/no-nested-ternary",
+      "- unused-imports/no-unused-imports",
+      "- unused-imports/no-unused-vars",
     ],
   },
 ]
