@@ -60,6 +60,7 @@ export const GLOB_EXCLUDE = [
   '**/yarn.lock',
   '**/pnpm-lock.yaml',
   '**/bun.lockb',
+  '**/migration_lock.toml',
 
   '**/output',
   '**/coverage',
@@ -75,6 +76,7 @@ export const GLOB_EXCLUDE = [
   '**/.vercel',
   '**/.changeset',
   '**/.idea',
+  '**/.agents',
   '**/.cache',
   '**/.output',
   '**/.vite-inspect',

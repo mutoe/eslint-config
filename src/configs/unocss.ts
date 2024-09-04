@@ -22,6 +22,7 @@ export async function unocss(
 
   return [
     {
+      files: ['!**/*.md/**'],
       name: 'antfu/unocss',
       plugins: {
         unocss: pluginUnoCSS,

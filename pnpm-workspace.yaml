@@ -9,8 +9,13 @@ trustPolicyExclude:
 
 packages:
   - fixtures/*
+
+patchedDependencies:
+  eslint-plugin-perfectionist@5.6.0: patches/eslint-plugin-perfectionist@5.6.0.patch
+  eslint-plugin-unicorn@63.0.0: patches/eslint-plugin-unicorn@63.0.0.patch
 catalog:
   '@antfu/eslint-config': 7.6.1
+  '@mutoe/eslint-plugin-perfectionist-vue': ^1.0.2
 catalogs:
   dev:
     '@angular/core': ^21.1.5
