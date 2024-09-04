@@ -170,7 +170,8 @@ export async function vue(
         'vue/component-tags-order': 'off',
         'vue/custom-event-name-casing': ['error', 'camelCase'],
         'vue/define-macros-order': ['error', {
-          order: ['defineOptions', 'defineProps', 'defineEmits', 'defineSlots'],
+          defineExposeLast: true,
+          order: ['defineOptions', 'defineModel', 'defineProps', 'defineEmits', 'defineSlots'],
         }],
         'vue/dot-location': ['error', 'property'],
         'vue/dot-notation': ['error', { allowKeywords: true }],
