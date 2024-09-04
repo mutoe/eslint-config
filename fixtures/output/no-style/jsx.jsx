@@ -4,7 +4,7 @@ export function HelloWorld({
 
   const [num] = React.useState(()=>    Math
       .floor (Math.random() * 1e+7).toString()
-        .replace(/\.\d+/g, ""))
+        .replaceAll(/\.\d+/g, ""))
 
   if(!greeting){
     return null};

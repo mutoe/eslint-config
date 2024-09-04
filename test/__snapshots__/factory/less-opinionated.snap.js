@@ -153,13 +153,16 @@
     ],
   },
   {
+    "name": "antfu/node/setup",
+    "plugins": [
+      "node",
+    ],
+  },
+  {
     "files": [
       "**/*.?([cm])[jt]s?(x)",
     ],
     "name": "antfu/node/rules",
-    "plugins": [
-      "node",
-    ],
     "rules": [
       "node/handle-callback-err",
       "node/no-deprecated-api",
@@ -541,6 +544,7 @@
     "name": "antfu/vue/setup",
     "plugins": [
       "vue",
+      "vue-a11y",
     ],
   },
   {
@@ -724,6 +728,28 @@
       "vue/quote-props",
       "vue/space-in-parens",
       "vue/template-curly-spacing",
+      "vue-a11y/alt-text",
+      "vue-a11y/anchor-has-content",
+      "vue-a11y/aria-props",
+      "vue-a11y/aria-role",
+      "vue-a11y/aria-unsupported-elements",
+      "vue-a11y/click-events-have-key-events",
+      "vue-a11y/form-control-has-label",
+      "vue-a11y/heading-has-content",
+      "vue-a11y/iframe-has-title",
+      "vue-a11y/interactive-supports-focus",
+      "vue-a11y/label-has-for",
+      "vue-a11y/media-has-caption",
+      "vue-a11y/mouse-events-have-key-events",
+      "vue-a11y/no-access-key",
+      "vue-a11y/no-aria-hidden-on-focusable",
+      "vue-a11y/no-autofocus",
+      "vue-a11y/no-distracting-elements",
+      "vue-a11y/no-redundant-roles",
+      "vue-a11y/no-role-presentation-on-focusable",
+      "vue-a11y/no-static-element-interactions",
+      "vue-a11y/role-has-required-aria-props",
+      "vue-a11y/tabindex-no-positive",
     ],
   },
   {
@@ -1090,6 +1116,158 @@
       "- antfu/no-top-level-await",
       "- no-console",
       "- ts/explicit-function-return-type",
+    ],
+  },
+  {
+    "files": [
+      "**/package.json",
+    ],
+    "name": "mutoe/sort/package-json",
+    "rules": [
+      "jsonc/array-bracket-newline",
+      "jsonc/array-element-newline",
+      "jsonc/object-curly-newline",
+      "jsonc/object-property-newline",
+      "jsonc/sort-array-values",
+      "jsonc/sort-keys",
+    ],
+  },
+  {
+    "name": "mutoe/perfectionist",
+    "rules": [
+      "perfectionist/sort-exports",
+      "perfectionist/sort-imports",
+      "perfectionist/sort-named-exports",
+      "perfectionist/sort-named-imports",
+    ],
+  },
+  {
+    "name": "mutoe/javascript",
+    "rules": [
+      "camelcase",
+      "no-cond-assign",
+      "prefer-arrow-callback",
+    ],
+  },
+  {
+    "name": "mutoe/unicorn/rules",
+    "rules": [
+      "- unicorn/explicit-length-check",
+      "unicorn/filename-case",
+      "- unicorn/no-lonely-if",
+      "- unicorn/no-null",
+      "- unicorn/no-useless-spread",
+      "- unicorn/no-useless-undefined",
+      "- unicorn/prefer-spread",
+      "- unicorn/prefer-switch",
+      "- unicorn/prefer-ternary",
+      "- unicorn/prevent-abbreviations",
+    ],
+  },
+  {
+    "files": [
+      "**/{locale,lang}?(s)/**",
+    ],
+    "name": "mutoe/unicorn/locale-rules",
+    "rules": [
+      "- unicorn/filename-case",
+    ],
+  },
+  {
+    "files": [
+      "**/*.?([cm])ts",
+      "**/*.?([cm])tsx",
+      "**/*.vue",
+    ],
+    "name": "mutoe/typescript/rules",
+    "rules": [
+      "ts/no-unused-expressions",
+      "- ts/strict-boolean-expressions",
+    ],
+  },
+  {
+    "files": [
+      "**/__tests__/**/*.?([cm])[jt]s?(x)",
+      "**/*.spec.?([cm])[jt]s?(x)",
+      "**/*.test.?([cm])[jt]s?(x)",
+      "**/*.bench.?([cm])[jt]s?(x)",
+      "**/*.benchmark.?([cm])[jt]s?(x)",
+    ],
+    "name": "mutoe/typescript/tests-rules",
+    "rules": [
+      "- ts/no-namespace",
+      "- ts/no-unsafe-argument",
+      "- ts/no-unsafe-assignment",
+      "- ts/no-unsafe-call",
+      "- ts/no-unsafe-member-access",
+      "- ts/no-unsafe-return",
+      "- ts/unbound-method",
+    ],
+  },
+  {
+    "files": [
+      "**/*.vue",
+    ],
+    "name": "mutoe/vue/rules",
+    "plugins": [
+      "perfectionist-vue",
+    ],
+    "rules": [
+      "perfectionist-vue/sort-vue-attributes",
+      "- unicorn/prefer-module",
+      "- vue/attributes-order",
+      "vue/block-order",
+      "vue/component-name-in-template-casing",
+      "vue/define-emits-declaration",
+      "vue/define-props-declaration",
+      "vue/html-comment-content-newline",
+      "vue/html-comment-indent",
+      "vue/max-attributes-per-line",
+      "vue/no-ref-object-reactivity-loss",
+      "vue/no-required-prop-with-default",
+      "vue/no-template-target-blank",
+      "vue/no-useless-mustaches",
+      "vue/padding-line-between-tags",
+      "- vue/singleline-html-element-content-newline",
+      "- ts/no-use-before-define",
+    ],
+  },
+  {
+    "name": "mutoe/stylistic",
+    "rules": [
+      "- antfu/consistent-chaining",
+      "- antfu/if-newline",
+      "style/arrow-parens",
+      "- style/jsx-one-expression-per-line",
+      "style/linebreak-style",
+      "style/quotes",
+    ],
+  },
+  {
+    "files": [
+      "**/*.y?(a)ml",
+    ],
+    "name": "mutoe/stylistic/yaml/rules",
+    "rules": [
+      "yaml/flow-sequence-bracket-spacing",
+    ],
+  },
+  {
+    "files": [
+      "**/generated/**",
+    ],
+    "name": "mutoe/generated-rules",
+    "rules": [
+      "- ts/no-unnecessary-type-constraint",
+      "- ts/no-unsafe-argument",
+      "- ts/no-unsafe-assignment",
+      "- ts/no-unsafe-call",
+      "- ts/no-unsafe-member-access",
+      "- ts/no-unsafe-return",
+      "- unicorn/no-array-reduce",
+      "- unicorn/no-nested-ternary",
+      "- unused-imports/no-unused-imports",
+      "- unused-imports/no-unused-vars",
     ],
   },
 ]

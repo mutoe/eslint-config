@@ -217,4 +217,53 @@
       "- ts/explicit-function-return-type",
     ],
   },
+  {
+    "files": [
+      "**/package.json",
+    ],
+    "name": "mutoe/sort/package-json",
+    "rules": [
+      "jsonc/array-bracket-newline",
+      "jsonc/array-element-newline",
+      "jsonc/object-curly-newline",
+      "jsonc/object-property-newline",
+      "jsonc/sort-array-values",
+      "jsonc/sort-keys",
+    ],
+  },
+  {
+    "name": "mutoe/perfectionist",
+    "rules": [
+      "perfectionist/sort-exports",
+      "perfectionist/sort-imports",
+      "perfectionist/sort-named-exports",
+      "perfectionist/sort-named-imports",
+    ],
+  },
+  {
+    "name": "mutoe/javascript",
+    "rules": [
+      "camelcase",
+      "no-cond-assign",
+      "prefer-arrow-callback",
+    ],
+  },
+  {
+    "files": [
+      "**/generated/**",
+    ],
+    "name": "mutoe/generated-rules",
+    "rules": [
+      "- ts/no-unnecessary-type-constraint",
+      "- ts/no-unsafe-argument",
+      "- ts/no-unsafe-assignment",
+      "- ts/no-unsafe-call",
+      "- ts/no-unsafe-member-access",
+      "- ts/no-unsafe-return",
+      "- unicorn/no-array-reduce",
+      "- unicorn/no-nested-ternary",
+      "- unused-imports/no-unused-imports",
+      "- unused-imports/no-unused-vars",
+    ],
+  },
 ]

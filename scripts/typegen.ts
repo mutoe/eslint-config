@@ -3,9 +3,9 @@ import fs from 'node:fs/promises'
 import { flatConfigsToRulesDTS } from 'eslint-typegen/core'
 import { builtinRules } from 'eslint/use-at-your-own-risk'
 import { CONFIG_PRESET_FULL_ON } from 'src/config-presets'
-import { antfu } from '../src/factory'
+import { defineConfig } from '../src/factory'
 
-const configs = await antfu(CONFIG_PRESET_FULL_ON)
+const configs = await defineConfig(CONFIG_PRESET_FULL_ON)
   .prepend(
     {
       plugins: {
