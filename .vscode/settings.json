@@ -50,5 +50,22 @@
       "source": "./fixtures/output/**/*.*",
       "target": "./fixtures/input/<base>"
     }
+  ],
+  "cSpell.words": [
+    "antfu",
+    "astro",
+    "ependencies",
+    "esno",
+    "execa",
+    "jiti",
+    "linebreak",
+    "lockb",
+    "nonwords",
+    "picocolors",
+    "slidev",
+    "stroustrup",
+    "typecheck",
+    "typegen",
+    "vuejs"
   ]
 }
