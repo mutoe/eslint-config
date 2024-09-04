@@ -1,7 +1,7 @@
 import type { OptionsConfig, TypedFlatConfigItem } from '../src/types'
 import { it } from 'vitest'
 import { CONFIG_PRESET_FULL_OFF, CONFIG_PRESET_FULL_ON } from '../src/config-presets'
-import { antfu } from '../src/factory'
+import { defineConfig } from '../src/factory'
 
 interface Suite {
   name: string
@@ -103,7 +103,7 @@ function serializeConfigs(configs: TypedFlatConfigItem[]) {
 
 suites.forEach(({ name, configs }) => {
   it.concurrent(`factory ${name}`, async ({ expect }) => {
-    const config = await antfu(configs)
+    const config = await defineConfig(configs)
     await expect(serializeConfigs(config))
       .toMatchFileSnapshot(`./__snapshots__/factory/${name}.snap.js`)
   })
