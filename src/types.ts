@@ -49,9 +49,26 @@ export interface OptionsVue extends OptionsOverrides {
    * Vue accessibility plugin. Help check a11y issue in `.vue` files upon enabled
    *
    * @see https://vue-a11y.github.io/eslint-plugin-vuejs-accessibility/
-   * @default false
+   * @default true
    */
-  a11y?: boolean
+  a11y?: boolean | {
+    /**
+     * For the `labelComponents` option, these strings determine which elements (always including <label>) should be checked for having the for prop.
+     *
+     * This is a good use case when you have a wrapper component that simply renders a label element.
+     *
+     * @see https://vue-a11y.github.io/eslint-plugin-vuejs-accessibility/rules/label-has-for.html
+     */
+    labelComponents?: string[]
+    /**
+     * For the `controlComponents` option, these strings determine which elements should be counted as form control elements.
+     *
+     * By default, this includes input, meter, progress, select, and textarea. This is a good use case when you have a wrapper component that simplify renders a input element.
+     *
+     * @see https://vue-a11y.github.io/eslint-plugin-vuejs-accessibility/rules/label-has-for.html
+     */
+    controlComponents?: string[]
+  }
 }
 
 export type OptionsTypescript =
@@ -434,6 +451,11 @@ export interface OptionsConfig extends OptionsComponentExts, OptionsProjectType 
    * @default true
    */
   autoRenamePlugins?: boolean
+
+  /**
+   * Mutoe's preferred rules
+   */
+  mutoe?: boolean
 
   /**
    * Provide overrides for rules for each integration.

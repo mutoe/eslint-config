@@ -28,6 +28,18 @@ export const parserPlain = {
   }),
 }
 
+export function changeLevel<T extends Record<string, unknown>>(rules: T, from: string, to: string): T {
+  return Object.fromEntries(Object.entries(rules).map(
+    ([key, value]) => {
+      if (value === from)
+        value = to
+      else if (Array.isArray(value) && value.at(0) === from)
+        value = [to, ...value.slice(1)]
+      return [key, value]
+    },
+  )) as T
+}
+
 /**
  * Combine array and non-array configs into a single array.
  */
