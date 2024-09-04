@@ -11,8 +11,22 @@ Based on the version of @Antfu, the following sections have been modified:
 
 - Update default package name to `defineConfig`
 - Supplement more `package.json` properties ordering rules
-- (Plan) Reduce the number of default dependencies
-- (Plan) Some of my favorite styles
+- By default, all recommendation rules from unicorn are enabled
+- Grouped `perfectionist` rules (imports, classes, union/interaction types)
+- Only allow camelCase in variable names
+- JavaScript: allow named function as callback (for error stack trace readability)
+- TypeScript: consistent type assertions (use `xxx as T` instead of `<T>xxx`)
+- TypeScript: always need to add await before async function call
+- Vue: block order change to ['template', 'script', 'style']
+- Vue: don't allow attribute more than 3 in one line
+- Vue: Allow singleline html element
+- JSX: allow multiple element in one line
+- YAML: always add space inner brackets (`[]` `{}`)
+- Test: ignore some type wares rules for tests
+- Test: support optional cypress recommended rules
+- Style: turned off [`antfu/if-newline`](https://github.com/antfu/eslint-plugin-antfu/blob/main/src/rules/if-newline.md), [`antfu/consistent-chaining`](https://github.com/antfu/eslint-plugin-antfu/blob/main/src/rules/consistent-chaining.md) rules
+- Style: set linebreak-style to `unix`
+- Style: avoid escape quotes in statement
 
 ---
 
