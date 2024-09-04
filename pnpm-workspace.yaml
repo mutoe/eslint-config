@@ -7,6 +7,7 @@ overrides:
   tsx: ^4.19.3
 catalog:
   '@antfu/eslint-config': 4.11.0
+  '@mutoe/eslint-plugin-perfectionist-vue': ^1.0.0
 catalogs:
   dev:
     '@antfu/ni': ^24.3.0
