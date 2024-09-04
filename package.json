@@ -1,7 +1,7 @@
 {
   "name": "@mutoe/eslint-config",
   "type": "module",
-  "version": "7.6.1",
+  "version": "7.6.1-5",
   "packageManager": "pnpm@10.30.2",
   "description": "Mutoe's ESLint config (forked from antfu/eslint-config)",
   "author": "mutoe <imutoe@gmail.com> (https://github.com/mutoe/)",
@@ -133,6 +133,7 @@
     "@clack/prompts": "catalog:prod",
     "@eslint-community/eslint-plugin-eslint-comments": "catalog:prod",
     "@eslint/markdown": "catalog:prod",
+    "@mutoe/eslint-plugin-perfectionist-vue": "catalog:",
     "@stylistic/eslint-plugin": "catalog:prod",
     "@typescript-eslint/eslint-plugin": "catalog:prod",
     "@typescript-eslint/parser": "catalog:prod",

@@ -2,13 +2,12 @@ import React from "react"
 
 export function HelloWorld({
 	greeting = "hello",
-	greeted = "\"World\"",
+	greeted = '"World"',
 	silent = false,
 	onMouseOver,
 }) {
 	const [num] = React.useState(() => Math
-		.floor (Math.random() * 1e+7)
-		.toString()
+		.floor (Math.random() * 1e+7).toString()
 		.replace(/\.\d+/g, ""))
 
 	if (!greeting) {

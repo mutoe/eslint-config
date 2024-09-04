@@ -1,6 +1,6 @@
-import { antfu } from './src'
+import { defineConfig } from '../src'
 
-export default antfu(
+export default defineConfig(
   {
     vue: {
       a11y: true,

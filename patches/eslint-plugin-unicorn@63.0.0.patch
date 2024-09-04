@@ -1,0 +1,30 @@
+diff --git a/rules/expiring-todo-comments.js b/rules/expiring-todo-comments.js
+index 848f4ea0942096747172e32976379ffd5c8836db..662704faa46507801b534a604a9ec30602f5a4cf 100644
+--- a/rules/expiring-todo-comments.js
++++ b/rules/expiring-todo-comments.js
+@@ -10,6 +10,16 @@ import {readPackageJson} from './shared/package-json.js';
+ 
+ const baseRule = getBuiltinRule('no-warning-comments');
+ 
++function getSourceCodeComments(sourceCode) {
++	if (sourceCode.ast?.comments && Array.isArray(sourceCode.ast.comments))
++		return sourceCode.ast.comments;
++	if (typeof sourceCode.getAllComments === 'function') {
++		const result = sourceCode.getAllComments();
++		return result != null && typeof result[Symbol.iterator] === 'function' ? result : [];
++	}
++	return [];
++}
++
+ // `unicorn/` prefix is added to avoid conflicts with core rule
+ const MESSAGE_ID_AVOID_MULTIPLE_DATES = 'unicorn/avoidMultipleDates';
+ const MESSAGE_ID_EXPIRED_TODO = 'unicorn/expiredTodo';
+@@ -285,7 +295,7 @@ const create = context => {
+ 	const {packageJson, packageDependencies, parseArgument, parseTodoMessage, parseTodoWithArguments} = getPackageHelpers(dirname);
+ 
+ 	const {sourceCode} = context;
+-	const comments = sourceCode.getAllComments();
++	const comments = getSourceCodeComments(sourceCode);
+ 	const unusedComments = comments
+ 		.filter(comment => comment.type !== 'Shebang' && !isEslintDisableOrEnableDirective(context, comment))
+ 		// Block comments come as one.
