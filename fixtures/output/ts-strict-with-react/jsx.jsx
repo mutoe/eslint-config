@@ -7,8 +7,7 @@ export function HelloWorld({
   onMouseOver,
 }) {
   const [num] = React.useState(() => Math
-    .floor (Math.random() * 1e+7)
-    .toString()
+    .floor (Math.random() * 1e+7).toString()
     .replace(/\.\d+/g, ''))
 
   if (!greeting) {
