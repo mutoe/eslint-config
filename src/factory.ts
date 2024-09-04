@@ -13,6 +13,7 @@ import {
   jsonc,
   jsx,
   markdown,
+  mutoe,
   node,
   perfectionist,
   react,
@@ -85,6 +86,7 @@ export function defineConfig(
     componentExts = [],
     gitignore: enableGitignore = true,
     jsx: enableJsx = true,
+    mutoe: enableMutoe = true,
     react: enableReact = false,
     regexp: enableRegexp = true,
     solid: enableSolid = false,
@@ -154,7 +156,7 @@ export function defineConfig(
   )
 
   if (enableUnicorn) {
-    configs.push(unicorn(enableUnicorn === true ? {} : enableUnicorn))
+    configs.push(unicorn(enableUnicorn === true ? { allRecommended: true } : enableUnicorn))
   }
 
   if (enableVue) {
@@ -285,6 +287,19 @@ export function defineConfig(
 
   if ('files' in options) {
     throw new Error('[@antfu/eslint-config] The first argument should not contain the "files" property as the options are supposed to be global. Place it in the second or later config instead.')
+  }
+
+  if (enableMutoe) {
+    configs.push(mutoe({
+      componentExts,
+      react: !!enableReact,
+      stylistic: stylisticOptions,
+      test: !!options.test,
+      typescript: !!enableTypeScript,
+      unicorn: !!enableUnicorn,
+      vue: !!enableVue,
+      ...typescriptOptions,
+    }))
   }
 
   // User can optionally pass a flat config item to the first argument
