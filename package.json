@@ -1,7 +1,7 @@
 {
   "name": "@mutoe/eslint-config",
   "type": "module",
-  "version": "4.11.0",
+  "version": "4.11.0-2",
   "packageManager": "pnpm@10.6.5",
   "description": "Mutoe's ESLint config (forked from antfu/eslint-config)",
   "author": "mutoe <imutoe@gmail.com> (https://github.com/mutoe/)",
