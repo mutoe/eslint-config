@@ -1,4 +1,4 @@
-import { antfu } from './factory'
+import { defineConfig } from './factory'
 
 export * from './config-presets'
 export * from './configs'
@@ -7,4 +7,4 @@ export * from './globs'
 export * from './types'
 export * from './utils'
 
-export default antfu
+export default defineConfig
